@@ -13,6 +13,7 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     Route::controller(OfficeEmployeeController::class)->group(function () {
         Route::get('/office/employee', 'index')->name('employee.office.index');
         Route::get('/office/employee/create', 'create')->name('employee.office.create');
+        Route::post('/office/employee/store', 'store')->name('employee.office.store');
         // Route::get('/house/employee', 'houseEmployee')->name('house.office');
         // Route::get('/site/employee', 'siteEmployee')->name('employee.site');
     });

@@ -23,15 +23,20 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @forelse ($data as $key => $data)
                                     <tr>
-                                        <td>1</td>
-                                        <td>John</td>
-                                        <td>Doe</td>
-                                        <td>1500</td>
+                                        <td>{{$key +=1 }}</td>
+                                        <td>{{$data->first_name}}</td>
+                                        <td>{{$data->last_name}}</td>
+                                        <td>{{$data->cnic}}</td>
                                         <td>
                                             <button class="btn btn-outline-primary">View</button>
                                         </td>
                                     </tr>
+                                    @empty
+                                    <td>No data found.</td>
+                                    @endforelse
+
                                 </tbody>
                             </table>
                         </div>
