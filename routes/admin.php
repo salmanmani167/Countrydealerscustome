@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\OfficeEmployeeController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\PayrollController;
 
 
 
@@ -17,4 +18,6 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
         // Route::get('/house/employee', 'houseEmployee')->name('house.office');
         // Route::get('/site/employee', 'siteEmployee')->name('employee.site');
     });
+    Route::resource('payrolls', PayrollController::class);
+
 });

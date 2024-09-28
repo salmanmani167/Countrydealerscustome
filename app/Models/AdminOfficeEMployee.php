@@ -10,4 +10,10 @@ class AdminOfficeEMployee extends Model
     protected $table = "admin_office_employees";
     protected $guarded = [];
     use HasFactory;
+
+
+    public function payrolls()
+    {
+        return $this->hasMany(Payroll::class, 'employee_id');
+    }
 }

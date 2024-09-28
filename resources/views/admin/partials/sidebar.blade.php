@@ -28,5 +28,14 @@
                 <span class="menu-title">Admin Office Employee</span>
             </a>
         </li>
+        <li class="nav-item {{ Request::is('admin/payrolls/index') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('payrolls.index') }}">
+                <i class="fa fa-home menu-icon"></i>
+                <span class="menu-title">Payroll Management</span>
+            </a>
+        </li>
+
+
+
     </ul>
 </nav>
