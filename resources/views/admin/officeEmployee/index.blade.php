@@ -30,7 +30,9 @@
                                         <td>{{$data->last_name}}</td>
                                         <td>{{$data->cnic}}</td>
                                         <td>
-                                            <button class="btn btn-outline-primary">View</button>
+                                            <a href="{{route('employee.office.show' , $data->id)}}" class="btn btn-outline-primary"><i class="fa-regular fa-eye"></i></a>
+                                            <a href="{{route('employee.office.edit' , $data->id)}}" class="btn btn-outline-warning"><i class="fa-solid fa-pencil"></i></a>
+                                            <a href="{{route('employee.office.delete' , $data->id)}}" class="btn btn-outline-danger"><i class="fa-solid fa-trash"></i></a>
                                         </td>
                                     </tr>
                                     @empty

@@ -14,7 +14,10 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
         Route::get('/office/employee', 'index')->name('employee.office.index');
         Route::get('/office/employee/create', 'create')->name('employee.office.create');
         Route::post('/office/employee/store', 'store')->name('employee.office.store');
-        // Route::get('/house/employee', 'houseEmployee')->name('house.office');
+        Route::get('/house/employee/show/{id}', 'show')->name('employee.office.show');
+        Route::get('/house/employee/edit/{id}', 'edit')->name('employee.office.edit');
+        Route::post('/house/employee/update/{id}', 'update')->name('employee.office.update');
+        Route::get('/house/employee/delete/{id}', 'delete')->name('employee.office.delete');
         // Route::get('/site/employee', 'siteEmployee')->name('employee.site');
     });
 });

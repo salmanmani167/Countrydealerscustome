@@ -1,8 +1,6 @@
 @extends('admin.app')
 @section('content')
-@push('title')
-<title>Create Office Employees</title>
-@endpush
+
     <div class="content-wrapper">
         <div class="page-header">
             <h3 class="page-title">
