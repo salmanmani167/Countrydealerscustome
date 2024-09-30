@@ -25,7 +25,13 @@
         <li class="nav-item {{ Request::is('admin/office/employee/index') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('employee.office.index') }}">
                 <i class="fa fa-home menu-icon"></i>
-                <span class="menu-title">Admin Office Employee</span>
+                <span class="menu-title">Employees</span>
+            </a>
+        </li>
+        <li class="nav-item {{ Request::is('admin/payroll') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('payroll.index') }}">
+                <i class="fa fa-home menu-icon"></i>
+                <span class="menu-title">Payrolls</span>
             </a>
         </li>
     </ul>

@@ -69,35 +69,85 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/2.1.7/js/dataTables.min.js"></script>
     <script src="{{ asset('assets/dist/jquery.toast.min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     @yield('bottom-scripts')
 
+    <script>
+        function confirmDelete() {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Submit the form if confirmed
+                    document.getElementById('delete-form').submit();
+
+                    // Show success toast after submission
+                    $.toast({
+                        heading: 'Success',
+                        text: 'Item deleted successfully!',
+                        icon: 'success',
+                        position: 'top-right',
+                        stack: false
+                    });
+                } else {
+                    // Show cancellation toast
+                    $.toast({
+                        heading: 'Cancelled',
+                        text: 'Delete operation was cancelled.',
+                        icon: 'info',
+                        position: 'top-right',
+                        stack: false
+                    });
+                }
+            });
+        }
+    </script>
     @if (session()->has('success'))
         <script>
-            $(document).ready(function() {
-                $.toast({
-                    heading: 'Success',
-                    text: '{{ session('success') }}',
-                    icon: 'success',
-                    position: 'top-right',
-                    stack: true
-                })
+            const Toast = Swal.mixin({
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.onmouseenter = Swal.stopTimer;
+                    toast.onmouseleave = Swal.resumeTimer;
+                }
             });
+            Toast.fire({
+                icon: "success",
+                title: '{{ session('success') }}'
+            });
+
+            // '{{ session('success') }}'
         </script>
     @elseif(session()->has('error'))
         <script>
-            $(document).ready(function() {
-                $.toast({
-                    heading: 'Error',
-                    text: '{{ session('error') }}',
-                    icon: 'error',
-                    position: 'top-right',
-                    stack: false
-                });
+            const Toast = Swal.mixin({
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.onmouseenter = Swal.stopTimer;
+                    toast.onmouseleave = Swal.resumeTimer;
+                }
+            });
+            Toast.fire({
+                icon: "error",
+                title: '{{ session('success') }}'
             });
         </script>
     @endif
-
-
     <!-- End custom js for this page-->
 </body>
 

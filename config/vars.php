@@ -19,5 +19,10 @@ return [
         'Sales',
         'Finance',
     ],
+    'employee_type' => [
+        'Admin Office Employee',
+        'House Employee',
+        'Site Employee',
+    ],
 
 ];

@@ -1,4 +1,25 @@
 <div class="row">
+    <div class="col-md-12">
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Employee Type</label>
+            <div class="col-sm-9">
+                <select class="form-control" name="employee_type">
+                    <option disabled selected>-- select an option --</option>
+                    @foreach (config('vars.employee_type') as $employeeType)
+                        <option value="{{ $employeeType }}" @if (!empty($data->employee_type) && $data->employee_type == $employeeType) selected @endif>
+                            {{ $employeeType }}
+                        </option>
+                    @endforeach
+                </select>
+                @error('employee_type')
+                    <small class="text-danger">{{ $message }}</small>
+                @enderror
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
     <div class="col-md-6">
         <div class="form-group row">
             <label class="col-sm-3 col-form-label">First Name</label>
@@ -105,7 +126,7 @@
     </div>
     <div class="col-md-6">
         <div class="form-group row">
-            <label class="col-sm-3 col-form-label">CNIC Front Image</label>
+            <label class="col-sm-3 col-form-label">CNIC Back Image</label>
             <div class="col-sm-9">
                 <input type="file" class="form-control" name="cnic_back_image" accept="image/*">
             </div>
@@ -261,7 +282,8 @@
         <div class="form-group row">
             <label class="col-sm-3 col-form-label">Date of Birth</label>
             <div class="col-sm-9">
-                <input class="form-control" placeholder="dd/mm/yyyy" name="date_of_birth" type="date">
+                <input class="form-control" placeholder="dd/mm/yyyy" name="date_of_birth" type="date"
+                    value="{{ $data['joining_date'] ?? '' }}">
                 @error('date_of_birth')
                     <small class="text-danger">{{ $message }}</small>
                 @enderror
