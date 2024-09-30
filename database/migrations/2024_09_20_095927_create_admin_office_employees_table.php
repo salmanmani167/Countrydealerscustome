@@ -37,6 +37,7 @@ return new class extends Migration {
             $table->integer('loan_return')->nullable();
             $table->integer('other_allowance')->nullable();
             $table->integer('cnic')->nullable();
+            $table->integer('loan_duration')->nullable();
             $table->string('employee_type')->nullable();
             $table->timestamps();
         });
