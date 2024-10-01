@@ -24,6 +24,7 @@
                                         <th>Other Allowances</th>
                                         <th>Net Salary</th>
                                         <th>Pay Salary</th>
+                                        <th>History</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -38,9 +39,13 @@
                                             <td>{{ $data->salary }}</td>
                                             <td>{{ $data->other_allowance }}</td>
                                             <td>{{ ($data->salary - $data->loan_return) + $data->other_allowance }}</td>
-                                            <td style="width: 270px">
-                                                <a href="javascript:;"
+                                            <td>
+                                                <a href="{{route('payroll.store' , $data->id)}}"
                                                     class="btn btn-sm btn-outline-primary"><i class="fa-solid fa-check"></i></a>
+                                            </td>
+                                            <td>
+                                                <a href="{{route('payroll.history' , $data->id)}}"
+                                                    class="btn btn-sm btn-outline-primary"><i class="fa-solid fa-eye"></i></a>
                                             </td>
                                         </tr>
                                     @empty

@@ -34,5 +34,17 @@
                 <span class="menu-title">Payrolls</span>
             </a>
         </li>
+        <li class="nav-item {{ Request::is('admin/client') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('client.index') }}">
+                <i class="fa-solid fa-user menu-icon"></i>
+                <span class="menu-title">Client</span>
+            </a>
+        </li>
+        <li class="nav-item {{ Request::is('admin/expense') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('expense.index') }}">
+                <i class="fa-solid fa-dollar-sign menu-icon"></i>
+                <span class="menu-title">Expense</span>
+            </a>
+        </li>
     </ul>
 </nav>

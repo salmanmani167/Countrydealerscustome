@@ -1,8 +1,11 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\ClientController;
 use App\Http\Controllers\Admin\EmployeePayrollController;
+use App\Http\Controllers\Admin\ExpenseController;
 use App\Http\Controllers\Admin\OfficeEmployeeController;
+use App\Http\Controllers\Admin\PayrollHistoryControlelr;
 use Illuminate\Support\Facades\Route;
 
 
@@ -23,5 +26,17 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
 
     Route::controller(EmployeePayrollController::class)->group(function () {
         Route::get('payroll', 'index')->name('payroll.index');
+        Route::get('payroll/store/{id}', 'store')->name('payroll.store');
+    });
+    Route::controller(PayrollHistoryControlelr::class)->group(function () {
+        Route::get('payroll/store/{id}', 'store')->name('payroll.store');
+        Route::get('payroll/history/{id}', 'history')->name('payroll.history');
+    });
+
+    Route::controller(ClientController::class)->group(function () {
+        Route::get('client', 'index')->name('client.index');
+    });
+    Route::controller(ExpenseController::class)->group(function () {
+        Route::get('expense', 'index')->name('expense.index');
     });
 });
