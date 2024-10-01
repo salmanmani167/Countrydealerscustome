@@ -20,7 +20,7 @@ class PayrollHistoryControlelr extends Controller
     }
     public function history($id)
     {
-        $history = $this->historyRepository->find($id);
-        dd($history);
+        $data = $this->historyRepository->find($id);
+        return view("admin.history.index", compact("data"));
     }
 }

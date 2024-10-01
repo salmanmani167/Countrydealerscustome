@@ -5,6 +5,9 @@
             <h3 class="page-title">
                 Clients
             </h3>
+            <div class="d-flex">
+                <a href="{{route('client.create')}}" class="btn btn-sm btn-primary">+ New</a>
+            </div>
         </div>
         <div class="card">
             <div class="card-body">

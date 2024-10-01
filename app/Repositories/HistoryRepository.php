@@ -18,7 +18,7 @@ class HistoryRepository
         $employee = AdminOfficeEmployee::find($id);
         if ($employee) {
             $historyData = $employee->toArray();
-            $historyData = collect($historyData)->except(['image', 'cnic_front_image' , 'cnic_back_image' , 'father_cnic_front_image' , 'father_cnic_back_image' , 'cv'])->toArray();
+            $historyData = collect($historyData)->except(['id','image', 'cnic_front_image' , 'cnic_back_image' , 'father_cnic_front_image' , 'father_cnic_back_image' , 'cv'])->toArray();
             $historyData['employee_id'] = $employee->id;
             History::create($historyData);
         }

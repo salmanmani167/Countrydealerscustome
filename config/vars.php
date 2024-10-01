@@ -24,5 +24,9 @@ return [
         'House Employee',
         'Site Employee',
     ],
+    'client_type' => [
+        'Indivisual',
+        'Business',
+    ],
 
 ];
