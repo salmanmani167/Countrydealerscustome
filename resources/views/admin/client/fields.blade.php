@@ -106,7 +106,7 @@
             <label class="col-sm-3 col-form-label">Properties/Vehicles Adjusted</label>
             <div class="col-md-12">
                 <textarea name="vehicles_adjustment" rows="10" id="" class="form-control"
-                    placeholder="Details of any properties or vehicles adjusted" ></textarea>
+                    placeholder="Details of any properties or vehicles adjusted"></textarea>
                 @error('agreement')
                     <small class="text-danger">{{ $message }}</small>
                 @enderror
@@ -130,7 +130,7 @@
             <label class="col-sm-3 col-form-label">Picture of adjustment product</label>
             <div class="col-sm-9">
                 <input type="file" class="form-control" name="adjustment_product"
-                    value="{{ $data['adjustment_product'] ?? '' }}" placeholder="Picture of adjustment product">
+                    value="{{ $data['adjustment_product'] ?? '' }}" placeholder="Picture of adjustment product" accept="image/*">
                 @error('adjustment_product')
                     <small class="text-danger">{{ $message }}</small>
                 @enderror
@@ -139,9 +139,9 @@
     </div>
     <div class="col-md-6">
         <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Select Payment</label>
+            <label class="col-sm-3 col-form-label">Select Payment Type</label>
             <div class="col-sm-9">
-                <select name="full_payment_check" id="" class="form-control">
+                <select name="full_payment_check" id="payment_type" class="form-control">
                     <option disabled selected>-- selelc if payment is full or not --</option>
                     <option value="yes">Yes</option>
                     <option value="no">No</option>
@@ -152,85 +152,29 @@
             </div>
         </div>
     </div>
-    <div class="col-md-6">
-        <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Installment Plan</label>
-            <div class="col-sm-9">
-                <select name="installment_plan" id="" class="form-control">
-                    <option disabled selected>-- selelc installment plan --</option>
-                    <option value="1">1 Year</option>
-                    <option value="2">2 Year</option>
-                    <option value="3">3 Year</option>
-                    <option value="4">4 Year</option>
-                    <option value="5">5 Year</option>
-                </select>
-                @error('installment_plan')
-                    <small class="text-danger">{{ $message }}</small>
-                @enderror
-            </div>
-        </div>
+    <div class="col-md-6" id="full_payment_box">
+        {{-- dynamic html --}}
     </div>
-    <div class="col-md-6">
-        <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Monthly Return</label>
-            <div class="col-sm-9">
-                <input type="number" class="form-control" name="monthly_return"
-                    value="{{ $data['monthly_return'] ?? '' }}" placeholder="Monthly Payment Return in rupees">
-                @error('monthly_return')
-                    <small class="text-danger">{{ $message }}</small>
-                @enderror
-            </div>
-        </div>
+    <div class="col-md-6 full_payment_box">
+
     </div>
-    <div class="col-md-6">
-        <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Payment Method</label>
-            <div class="col-sm-9">
-                <select name="full_payment_check" id="" class="form-control">
-                    <option disabled selected>-- selelc payment method --</option>
-                    <option value="cheque">Cheque</option>
-                    <option value="cash">Cash</option>
-                </select>
-                @error('full_payment_check')
-                    <small class="text-danger">{{ $message }}</small>
-                @enderror
-            </div>
-        </div>
+    <div class="col-md-6 cash_field_count_box">
+
     </div>
-    <div class="col-md-6">
-        <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Picture of cheque</label>
-            <div class="col-sm-9">
-                <input type="file" class="form-control" name="cheque_image"
-                    value="{{ $data['cheque_image'] ?? '' }}" accept="image/*">
-                @error('cheque_image')
-                    <small class="text-danger">{{ $message }}</small>
-                @enderror
-            </div>
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Reminder Date</label>
-            <div class="col-sm-9">
-                <input type="date" class="form-control" name="reminder_date"
-                    value="{{ $data['reminder_date'] ?? '' }}" accept="image/*">
-                @error('reminder_date')
-                    <small class="text-danger">{{ $message }}</small>
-                @enderror
-            </div>
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Due Date</label>
-            <div class="col-sm-9">
-                <input type="date" class="form-control" name="due_date"
-                    value="{{ $data['due_date'] ?? '' }}" accept="image/*">
-                @error('due_date')
-                    <small class="text-danger">{{ $message }}</small>
-                @enderror
-            </div>
-        </div>
-    </div>
+
+</div>
+<div class="cheque_boxes row">
+
+</div>
+<div class="row">
+    <label class="col-sm-3 col-form-label">Select Sales Officer</label>
+    <select name="" id="" class="form-control">
+        <option selected disabled>-- select sales officer --</option>
+        @foreach ($salesOfficers as $salesOfficer)
+        <option value="{{$salesOfficer->id}}">{{$salesOfficer->name}}</option>
+        @endforeach
+    </select>
+</div>
+<div class="row" id="cheque_fields_container">
+
 </div>

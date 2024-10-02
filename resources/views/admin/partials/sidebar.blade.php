@@ -46,5 +46,11 @@
                 <span class="menu-title">Expense</span>
             </a>
         </li>
+        <li class="nav-item {{ Request::is('admin/sales/officer') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('sales.officer.index') }}">
+                <i class="fa-solid fa-user menu-icon"></i>
+                <span class="menu-title">Sales Officer</span>
+            </a>
+        </li>
     </ul>
 </nav>
