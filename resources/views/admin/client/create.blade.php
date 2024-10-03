@@ -25,13 +25,13 @@
 @section('bottom-scripts')
     <script>
         let ifCheque = false;
-
+        // installment payment fields
         function generateChequeFields() {
             let html = `<div class="col-md-4">
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Picture of cheque</label>
                             <div class="col-sm-9">
-                                <input type="file" class="form-control" name="cheque_image_installment_payment" accept="image/*">
+                                <input type="file" class="form-control" name="cheque_image" accept="image/*">
                             </div>
                         </div>
                     </div>
@@ -54,7 +54,7 @@
                     `;
             return html;
         }
-
+        // installment payment fields
         function generatePaymentFields() {
             let html = `<div class="col-md-6">
                         <div class="form-group row">
@@ -114,7 +114,7 @@
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Picture of cheque</label>
                             <div class="col-sm-9">
-                                <input type="file" class="form-control" name="cheque_image_payment_full" accept="image/*">
+                                <input type="file" class="form-control" name="cheque_image" accept="image/*">
                             </div>
                         </div>
                     </div>
@@ -130,7 +130,7 @@
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Amount</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" name="check_amount_full_payment" placeholder = "Enter Amount Here">
+                                <input type="text" class="form-control" name="check_amount" placeholder = "Enter Amount Here">
                             </div>
                         </div>
                     </div>`)
@@ -187,27 +187,39 @@
                 e.preventDefault();
                 $('#sales_officer_box').append(
                     `<div class="row col-md-12 officer-row">
-                    <div class="col-md-6">
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Select Sales Officer</label>
-                            <div class="col-sm-9">
-                                <select name="" id="" class="form-control">
-                                    <option selected disabled>-- select sales officer --</option>
-                                    @foreach ($salesOfficers as $salesOfficer)
-                                        <option value="{{ $salesOfficer->id }}">{{ $salesOfficer->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-5">
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Sales Officer Commission</label>
-                            <div class="col-sm-9">
-                                <input type="number" class="form-control" placeholder="Commission here">
-                            </div>
-                        </div>
-                    </div>
+                    <div class="col-md-4">
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Officer</label>
+            <div class="">
+                <select name="" id="" class="form-control">
+                    <option selected disabled>-- select sales officer --</option>
+                    @foreach ($salesOfficers as $salesOfficer)
+                        <option value="{{ $salesOfficer->id }}">{{ $salesOfficer->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Type</label>
+            <div class="col-sm-9">
+                <select name="commission_type" id="" class="form-control">
+                    <option selected disabled>-- select type --</option>
+                    <option value="percent">Percent</option>
+                    <option value="cash">Cash</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Commission</label>
+            <div class="col-sm-8">
+                <input type="number" class="form-control" placeholder="Commission here">
+            </div>
+        </div>
+    </div>
                     <div class="col-md-1">
                         <div class="form-group row">
                             <div class="col-sm-9">
@@ -227,15 +239,14 @@
                 e.preventDefault();
                 count += 1;
                 $('#add_more_owners_box').append(
-                `
+                    `
                 <div class="col-md-6">
-                    <h5>${count}</h5>
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label">Name</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="name" value="{{ $data['name'] ?? '' }}"
+                            <input type="text" class="form-control" name="other_owner_name" value="{{ $data['other_owner_name'] ?? '' }}"
                                 placeholder="Name Here">
-                            @error('name')
+                            @error('other_owner_name')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>
@@ -245,8 +256,8 @@
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label">Email</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="email" value="{{ $data['email'] ?? '' }}" placeholder="Email Here">
-                            @error('email')
+                            <input type="text" class="form-control" name="other_owner_email" value="{{ $data['email'] ?? '' }}" placeholder="Email Here">
+                            @error('other_owner_email')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>
@@ -256,9 +267,9 @@
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label">Number</label>
                         <div class="col-sm-9">
-                            <input type="number" class="form-control" name="number" value="{{ $data['number'] ?? '' }}"
+                            <input type="number" class="form-control" name="other_owner_number" value="{{ $data['number'] ?? '' }}"
                                 placeholder="Number Here">
-                            @error('number')
+                            @error('other_owner_number')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>
@@ -268,9 +279,9 @@
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label">Fatehr/Husband Name</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="father_or_husband_name" value="{{ $data['father_or_husband_name'] ?? '' }}"
+                            <input type="text" class="form-control" name="other_owner_father_or_husband_name" value="{{ $data['father_or_husband_name'] ?? '' }}"
                                 placeholder="Email Here">
-                            @error('father_or_husband_name')
+                            @error('other_owner_father_or_husband_name')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>

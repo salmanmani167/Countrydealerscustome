@@ -43,7 +43,7 @@
             <label class="col-sm-3 col-form-label">Fatehr/Husband Name</label>
             <div class="col-sm-9">
                 <input type="text" class="form-control" name="father_or_husband_name" value="{{ $data['father_or_husband_name'] ?? '' }}"
-                    placeholder="Email Here">
+                    placeholder="Father/Husband Name Here">
                 @error('father_or_husband_name')
                     <small class="text-danger">{{ $message }}</small>
                 @enderror
@@ -182,7 +182,7 @@
             <div class="col-md-12">
                 <textarea name="vehicles_adjustment" rows="10" id="" class="form-control"
                     placeholder="Details of any properties or vehicles adjusted"></textarea>
-                @error('agreement')
+                @error('vehicles_adjustment')
                     <small class="text-danger">{{ $message }}</small>
                 @enderror
             </div>
@@ -220,19 +220,16 @@
         <div class="form-group row">
             <label class="col-sm-3 col-form-label">Select Payment Type</label>
             <div class="col-sm-9">
-                <select name="full_payment_check" id="payment_type" class="form-control">
+                <select name="payment_type" id="payment_type" class="form-control">
                     <option disabled selected>-- selelc if payment is full or not --</option>
                     <option value="yes">Yes</option>
                     <option value="no">No</option>
                 </select>
-                @error('full_payment_check')
+                @error('payment_type')
                     <small class="text-danger">{{ $message }}</small>
                 @enderror
             </div>
         </div>
-    </div>
-    <div class="col-md-12 my-2">
-        <h5 class="">Sales Officers Info</h5>
     </div>
     <div class="col-md-6" id="full_payment_box">
         {{-- dynamic html --}}
@@ -246,12 +243,15 @@
 </div>
 <div class="row" id="cheque_fields_container">
 </div>
+<div class="col-md-12 my-2">
+    <h5 class="">Sales Officers Info</h5>
+</div>
 <div class="row" id="sales_officer_box">
-    <div class="col-md-5">
+    <div class="col-md-4">
         <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Select Sales Officer</label>
-            <div class="col-sm-9">
-                <select name="" id="" class="form-control">
+            <label class="col-sm-3 col-form-label">Officer</label>
+            <div class="">
+                <select name="sales_officer_id" id="" class="form-control">
                     <option selected disabled>-- select sales officer --</option>
                     @foreach ($salesOfficers as $salesOfficer)
                         <option value="{{ $salesOfficer->id }}">{{ $salesOfficer->name }}</option>
@@ -260,17 +260,29 @@
             </div>
         </div>
     </div>
-    <div class="col-md-5">
+    <div class="col-md-3">
         <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Sales Officer Commission</label>
+            <label class="col-sm-3 col-form-label">Type</label>
             <div class="col-sm-9">
-                <input type="number" class="form-control" placeholder="Commission here">
+                <select name="commission_type" id="" class="form-control">
+                    <option selected disabled>-- select type --</option>
+                    <option value="percent">Percent</option>
+                    <option value="cash">Cash</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Commission</label>
+            <div class="col-sm-8">
+                <input type="number" class="form-control" placeholder="Commission here" name="commission_amount">
             </div>
         </div>
     </div>
     <div class="col-md-1">
         <div class="form-group row">
-            <button class="btn btn-sm btn-primary" id="add_more_officers">+ More Officers</button>
+            <button class="btn btn-sm btn-primary" id="add_more_officers">+</button>
         </div>
     </div>
 </div>
