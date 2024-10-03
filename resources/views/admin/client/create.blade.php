@@ -27,7 +27,7 @@
         let ifCheque = false;
 
         function generateChequeFields() {
-            let html = `<div class="col-md-6">
+            let html = `<div class="col-md-4">
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Picture of cheque</label>
                             <div class="col-sm-9">
@@ -35,16 +35,26 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Amount</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" name="cheque_installment_amount" placeholder="Amount here">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Due Date</label>
                             <div class="col-sm-9">
                                 <input type="date" class="form-control" name="cheque_installment_due_date">
                             </div>
                         </div>
-                    </div>`;
+                    </div>
+                    `;
             return html;
         }
+
         function generatePaymentFields() {
             let html = `<div class="col-md-6">
                         <div class="form-group row">
@@ -68,6 +78,7 @@
 
             $(document).on('change', '#payment_type', function() {
                 if ($(this).val() == 'yes') {
+                    $('.cheque_boxes').empty();
                     $('#full_payment_box').html(
                         `<div class="form-group row">
             <label class="col-sm-3 col-form-label">Payment Method</label>
@@ -81,6 +92,7 @@
         </div>`)
 
                 } else {
+                    $('.cheque_boxes').empty();
                     $('#full_payment_box').html(`<div class="form-group row">
             <label class="col-sm-3 col-form-label">Payment Method</label>
             <div class="col-sm-9">
@@ -98,7 +110,7 @@
                 $('#cheque_fields_container').empty();
                 if ($(this).val() == 'cheque') {
                     $('.cheque_boxes').html(`
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Picture of cheque</label>
                             <div class="col-sm-9">
@@ -106,11 +118,19 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Due Date</label>
                             <div class="col-sm-9">
                                 <input type="date" class="form-control" name="cheque_due_date">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Amount</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" name="check_amount_full_payment" placeholder = "Enter Amount Here">
                             </div>
                         </div>
                     </div>`)
@@ -161,8 +181,102 @@
                         $('#cheque_fields_container').append(html);
                     }
                 }
+            })
 
-
+            $(document).on('click', '#add_more_officers', function(e) {
+                e.preventDefault();
+                $('#sales_officer_box').append(
+                    `<div class="row col-md-12 officer-row">
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Select Sales Officer</label>
+                            <div class="col-sm-9">
+                                <select name="" id="" class="form-control">
+                                    <option selected disabled>-- select sales officer --</option>
+                                    @foreach ($salesOfficers as $salesOfficer)
+                                        <option value="{{ $salesOfficer->id }}">{{ $salesOfficer->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Sales Officer Commission</label>
+                            <div class="col-sm-9">
+                                <input type="number" class="form-control" placeholder="Commission here">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="form-group row">
+                            <div class="col-sm-9">
+                                <button class="btn btn-sm btn-danger delete-officer">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>`
+                )
+                $(document).on('click', '.delete-officer', function(e) {
+                    e.preventDefault();
+                    $(this).closest('.officer-row').remove();
+                });
+            })
+            let count = 0;
+            $(document).on('click', '#add_more_owners', function(e) {
+                e.preventDefault();
+                count += 1;
+                $('#add_more_owners_box').append(
+                `
+                <div class="col-md-6">
+                    <h5>${count}</h5>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Name</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="name" value="{{ $data['name'] ?? '' }}"
+                                placeholder="Name Here">
+                            @error('name')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Email</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="email" value="{{ $data['email'] ?? '' }}" placeholder="Email Here">
+                            @error('email')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Number</label>
+                        <div class="col-sm-9">
+                            <input type="number" class="form-control" name="number" value="{{ $data['number'] ?? '' }}"
+                                placeholder="Number Here">
+                            @error('number')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Fatehr/Husband Name</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="father_or_husband_name" value="{{ $data['father_or_husband_name'] ?? '' }}"
+                                placeholder="Email Here">
+                            @error('father_or_husband_name')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
+                `)
             })
         })
     </script>

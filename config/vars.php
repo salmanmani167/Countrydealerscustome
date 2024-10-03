@@ -28,5 +28,9 @@ return [
         'Indivisual',
         'Business',
     ],
+    'sale_type' => [
+        'Land',
+        'House',
+    ],
 
 ];

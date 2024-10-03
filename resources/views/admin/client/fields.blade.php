@@ -1,4 +1,58 @@
 <div class="row">
+    <div class="col-md-12 my-2">
+        <h5 class="">Personal Info</h5>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Name</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" name="name" value="{{ $data['name'] ?? '' }}"
+                    placeholder="Name Here">
+                @error('name')
+                    <small class="text-danger">{{ $message }}</small>
+                @enderror
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Email</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" name="email" value="{{ $data['email'] ?? '' }}"
+                    placeholder="Email Here">
+                @error('email')
+                    <small class="text-danger">{{ $message }}</small>
+                @enderror
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Number</label>
+            <div class="col-sm-9">
+                <input type="number" class="form-control" name="number" value="{{ $data['number'] ?? '' }}"
+                    placeholder="Number Here">
+                @error('number')
+                    <small class="text-danger">{{ $message }}</small>
+                @enderror
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Fatehr/Husband Name</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" name="father_or_husband_name" value="{{ $data['father_or_husband_name'] ?? '' }}"
+                    placeholder="Email Here">
+                @error('father_or_husband_name')
+                    <small class="text-danger">{{ $message }}</small>
+                @enderror
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 my-2">
+        <h5 class="">Property Info</h5>
+    </div>
     <div class="col-md-6">
         <div class="form-group row">
             <label class="col-sm-3 col-form-label">Client Type</label>
@@ -8,6 +62,24 @@
                     @foreach (config('vars.client_type') as $clientType)
                         <option value="{{ $clientType }}" @if (!empty($data->clientType) && $data->clientType == $clientType) selected @endif>
                             {{ $clientType }}
+                        </option>
+                    @endforeach
+                </select>
+                @error('client_type')
+                    <small class="text-danger">{{ $message }}</small>
+                @enderror
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Sale Type</label>
+            <div class="col-sm-9">
+                <select class="form-control" name="sale_type">
+                    <option disabled selected>-- select an option --</option>
+                    @foreach (config('vars.sale_type') as $saleType)
+                        <option value="{{ $saleType }}" @if (!empty($data->saleType) && $data->saleType == $saleType) selected @endif>
+                            {{ $saleType }}
                         </option>
                     @endforeach
                 </select>
@@ -101,6 +173,9 @@
             </div>
         </div>
     </div>
+    <div class="col-md-12 my-2">
+        <h5 class="">Adjustment Info</h5>
+    </div>
     <div class="col-md-12">
         <div class="form-group row">
             <label class="col-sm-3 col-form-label">Properties/Vehicles Adjusted</label>
@@ -130,12 +205,16 @@
             <label class="col-sm-3 col-form-label">Picture of adjustment product</label>
             <div class="col-sm-9">
                 <input type="file" class="form-control" name="adjustment_product"
-                    value="{{ $data['adjustment_product'] ?? '' }}" placeholder="Picture of adjustment product" accept="image/*">
+                    value="{{ $data['adjustment_product'] ?? '' }}" placeholder="Picture of adjustment product"
+                    accept="image/*">
                 @error('adjustment_product')
                     <small class="text-danger">{{ $message }}</small>
                 @enderror
             </div>
         </div>
+    </div>
+    <div class="col-md-12 my-2">
+        <h5 class="">Payment Info</h5>
     </div>
     <div class="col-md-6">
         <div class="form-group row">
@@ -152,29 +231,57 @@
             </div>
         </div>
     </div>
+    <div class="col-md-12 my-2">
+        <h5 class="">Sales Officers Info</h5>
+    </div>
     <div class="col-md-6" id="full_payment_box">
         {{-- dynamic html --}}
     </div>
     <div class="col-md-6 full_payment_box">
-
     </div>
     <div class="col-md-6 cash_field_count_box">
-
     </div>
-
 </div>
 <div class="cheque_boxes row">
-
-</div>
-<div class="row">
-    <label class="col-sm-3 col-form-label">Select Sales Officer</label>
-    <select name="" id="" class="form-control">
-        <option selected disabled>-- select sales officer --</option>
-        @foreach ($salesOfficers as $salesOfficer)
-        <option value="{{$salesOfficer->id}}">{{$salesOfficer->name}}</option>
-        @endforeach
-    </select>
 </div>
 <div class="row" id="cheque_fields_container">
+</div>
+<div class="row" id="sales_officer_box">
+    <div class="col-md-5">
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Select Sales Officer</label>
+            <div class="col-sm-9">
+                <select name="" id="" class="form-control">
+                    <option selected disabled>-- select sales officer --</option>
+                    @foreach ($salesOfficers as $salesOfficer)
+                        <option value="{{ $salesOfficer->id }}">{{ $salesOfficer->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-5">
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Sales Officer Commission</label>
+            <div class="col-sm-9">
+                <input type="number" class="form-control" placeholder="Commission here">
+            </div>
+        </div>
+    </div>
+    <div class="col-md-1">
+        <div class="form-group row">
+            <button class="btn btn-sm btn-primary" id="add_more_officers">+ More Officers</button>
+        </div>
+    </div>
+</div>
+<div class="col-md-12 my-2">
+    <h5 class="">Other Owners Info</h5>
+</div>
+<div class="col-md-12">
+    <div class="form-group row my-2 d-flex justify-content-end">
+        <button class="btn btn-sm btn-primary" id="add_more_owners">+ More Owners</button>
+    </div>
+</div>
+<div class="row" id="add_more_owners_box">
 
 </div>
