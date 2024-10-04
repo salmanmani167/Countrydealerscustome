@@ -166,7 +166,7 @@
             <label class="col-sm-3 col-form-label">Agreement (check for agreement)</label>
             <div class="">
                 <input type="checkbox" class="form-control mt-3 ml-1" name="agreement"
-                    value="{{ $data['agreement'] ?? '' }}">
+                    value="1">
                 @error('agreement')
                     <small class="text-danger">{{ $message }}</small>
                 @enderror
@@ -251,7 +251,7 @@
         <div class="form-group row">
             <label class="col-sm-3 col-form-label">Officer</label>
             <div class="">
-                <select name="sales_officer_id" id="" class="form-control">
+                <select name="sales_officer_id[]" id="" class="form-control">
                     <option selected disabled>-- select sales officer --</option>
                     @foreach ($salesOfficers as $salesOfficer)
                         <option value="{{ $salesOfficer->id }}">{{ $salesOfficer->name }}</option>
@@ -264,7 +264,7 @@
         <div class="form-group row">
             <label class="col-sm-3 col-form-label">Type</label>
             <div class="col-sm-9">
-                <select name="commission_type" id="" class="form-control">
+                <select name="commission_type[]" id="" class="form-control">
                     <option selected disabled>-- select type --</option>
                     <option value="percent">Percent</option>
                     <option value="cash">Cash</option>
@@ -276,7 +276,7 @@
         <div class="form-group row">
             <label class="col-sm-4 col-form-label">Commission</label>
             <div class="col-sm-8">
-                <input type="number" class="form-control" placeholder="Commission here" name="commission_amount">
+                <input type="number" class="form-control" placeholder="Commission here" name="commission_amount[]">
             </div>
         </div>
     </div>

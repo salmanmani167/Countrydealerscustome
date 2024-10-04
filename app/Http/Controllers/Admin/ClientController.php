@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreClientRequest;
 use Illuminate\Http\Request;
 use App\Repositories\ClientRepository;
 
@@ -22,5 +23,10 @@ class ClientController extends Controller
     {
         $salesOfficers = $this->clientRepository->getSalesOfficers();
         return view("admin.client.create" , compact("salesOfficers"));
+    }
+    public function store(StoreClientRequest $request)
+    {
+        $this->clientRepository->store($request->all());
+        return redirect()->back()->with("success","Record Created Successfully.");
     }
 }

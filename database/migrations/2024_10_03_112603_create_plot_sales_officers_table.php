@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('plot_sales_officers', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('client_id')->constrained('clients')->cascadeOnDelete();
             $table->foreignId('sales_officer_id')->constrained('sales_officers')->cascadeOnDelete();
             $table->string('commission_type')->nullable();
             $table->integer('commission_amount')->nullable();

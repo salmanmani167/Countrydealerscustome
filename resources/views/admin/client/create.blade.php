@@ -8,7 +8,7 @@
         </div>
         <div class="card">
             <div class="card-body">
-                <form action="{{ route('employee.office.store') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('client.store') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     @include('admin.client.fields')
                     <div class="col-md-12">
@@ -31,7 +31,7 @@
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Picture of cheque</label>
                             <div class="col-sm-9">
-                                <input type="file" class="form-control" name="cheque_image" accept="image/*">
+                                <input type="file" class="form-control" name="cheque_image[]" accept="image/*">
                             </div>
                         </div>
                     </div>
@@ -39,7 +39,7 @@
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Amount</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" name="cheque_installment_amount" placeholder="Amount here">
+                                <input type="text" class="form-control" name="cheque_installment_amount[]" placeholder="Amount here">
                             </div>
                         </div>
                     </div>
@@ -47,7 +47,7 @@
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Due Date</label>
                             <div class="col-sm-9">
-                                <input type="date" class="form-control" name="cheque_installment_due_date">
+                                <input type="date" class="form-control" name="cheque_installment_due_date[]">
                             </div>
                         </div>
                     </div>
@@ -60,7 +60,7 @@
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Payment</label>
                             <div class="col-sm-9">
-                                <input type="number" class="form-control" name="installment_payment">
+                                <input type="number" class="form-control" name="installment_payment[]" placeholder="Installment Payment Here">
                             </div>
                         </div>
                     </div>
@@ -68,7 +68,7 @@
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Due Date</label>
                             <div class="col-sm-9">
-                                <input type="date" class="form-control" name="payment_installment_due_date">
+                                <input type="date" class="form-control" name="payment_installment_due_date[]">
                             </div>
                         </div>
                     </div>`;
@@ -122,7 +122,7 @@
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Due Date</label>
                             <div class="col-sm-9">
-                                <input type="date" class="form-control" name="cheque_due_date">
+                                <input type="date" class="form-control" name="due_date">
                             </div>
                         </div>
                     </div>
@@ -191,7 +191,7 @@
         <div class="form-group row">
             <label class="col-sm-3 col-form-label">Officer</label>
             <div class="">
-                <select name="" id="" class="form-control">
+                <select name="sales_officer_id[]" id="" class="form-control">
                     <option selected disabled>-- select sales officer --</option>
                     @foreach ($salesOfficers as $salesOfficer)
                         <option value="{{ $salesOfficer->id }}">{{ $salesOfficer->name }}</option>
@@ -204,7 +204,7 @@
         <div class="form-group row">
             <label class="col-sm-3 col-form-label">Type</label>
             <div class="col-sm-9">
-                <select name="commission_type" id="" class="form-control">
+                <select name="commission_type[]" id="" class="form-control">
                     <option selected disabled>-- select type --</option>
                     <option value="percent">Percent</option>
                     <option value="cash">Cash</option>
@@ -216,7 +216,7 @@
         <div class="form-group row">
             <label class="col-sm-4 col-form-label">Commission</label>
             <div class="col-sm-8">
-                <input type="number" class="form-control" placeholder="Commission here">
+                <input type="number" class="form-control" placeholder="Commission here" name="commission_amount[]">
             </div>
         </div>
     </div>
@@ -244,7 +244,7 @@
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label">Name</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="other_owner_name" value="{{ $data['other_owner_name'] ?? '' }}"
+                            <input type="text" class="form-control" name="other_owner_name[]" value="{{ $data['other_owner_name'] ?? '' }}"
                                 placeholder="Name Here">
                             @error('other_owner_name')
                                 <small class="text-danger">{{ $message }}</small>
@@ -256,7 +256,7 @@
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label">Email</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="other_owner_email" value="{{ $data['email'] ?? '' }}" placeholder="Email Here">
+                            <input type="text" class="form-control" name="other_owner_email[]" value="{{ $data['email'] ?? '' }}" placeholder="Email Here">
                             @error('other_owner_email')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
@@ -267,7 +267,7 @@
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label">Number</label>
                         <div class="col-sm-9">
-                            <input type="number" class="form-control" name="other_owner_number" value="{{ $data['number'] ?? '' }}"
+                            <input type="number" class="form-control" name="other_owner_number[]" value="{{ $data['number'] ?? '' }}"
                                 placeholder="Number Here">
                             @error('other_owner_number')
                                 <small class="text-danger">{{ $message }}</small>
@@ -279,7 +279,7 @@
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label">Fatehr/Husband Name</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="other_owner_father_or_husband_name" value="{{ $data['father_or_husband_name'] ?? '' }}"
+                            <input type="text" class="form-control" name="other_owner_father_or_husband_name[]" value="{{ $data['father_or_husband_name'] ?? '' }}"
                                 placeholder="Email Here">
                             @error('other_owner_father_or_husband_name')
                                 <small class="text-danger">{{ $message }}</small>
@@ -292,3 +292,4 @@
         })
     </script>
 @endsection
+
