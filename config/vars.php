@@ -19,5 +19,18 @@ return [
         'Sales',
         'Finance',
     ],
+    'employee_type' => [
+        'Admin Office Employee',
+        'House Employee',
+        'Site Employee',
+    ],
+    'client_type' => [
+        'Indivisual',
+        'Business',
+    ],
+    'sale_type' => [
+        'Land',
+        'House',
+    ],
 
 ];
