@@ -16,13 +16,12 @@ class ClientRepository
     protected $PlotSalesOfficersCommissionRepo;
     protected $otherOwnersRepo;
     public function __construct(
-    Client $model,
-    PlotPaymentRepository $plotRepository,
-    PlotInstallmentRepo $plotInstallmentRepository,
-    PlotSalesOfficersCommissionRepo $PlotSalesOfficersCommissionRepo,
-    OtherOwnersRepo $otherOwnersRepo,
-    )
-    {
+        Client $model,
+        PlotPaymentRepository $plotRepository,
+        PlotInstallmentRepo $plotInstallmentRepository,
+        PlotSalesOfficersCommissionRepo $PlotSalesOfficersCommissionRepo,
+        OtherOwnersRepo $otherOwnersRepo,
+    ) {
         $this->model = $model;
         $this->plotRepository = $plotRepository;
         $this->plotInstallmentRepository = $plotInstallmentRepository;
@@ -34,6 +33,10 @@ class ClientRepository
         return SalesOfficer::all();
     }
 
+    public function all()
+    {
+        return $this->model->all();
+    }
     public function store($data)
     {
 
@@ -66,12 +69,15 @@ class ClientRepository
         } else {
             $this->plotInstallmentRepository->store($data, $clientId);
         }
-        if(!empty($data['sales_officer_id'])) {
+        if (!empty($data['sales_officer_id'])) {
             $this->PlotSalesOfficersCommissionRepo->store($data, $clientId);
         }
-        if(!empty($data['other_owner_name'])) {
+        if (!empty($data['other_owner_name'])) {
             $this->otherOwnersRepo->store($data, $clientId);
         }
     }
-
+    public function show($Id)
+    {
+        return $this->model->with(['installments' , 'owners' , 'payments' , 'saleOfficers.officer'])->where('id', $Id)->first();
+    }
 }

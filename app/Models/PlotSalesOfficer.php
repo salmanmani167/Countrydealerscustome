@@ -9,4 +9,8 @@ class PlotSalesOfficer extends Model
 {
     protected $guarded = [];
     use HasFactory;
+    public function officer()
+    {
+        return $this->belongsTo(SalesOfficer::class , 'sales_officer_id');
+    }
 }

@@ -17,16 +17,22 @@ class ClientController extends Controller
     }
     public function index()
     {
-        return view("admin.client.index");
+        $data = $this->clientRepository->all();
+        return view("admin.client.index", compact("data"));
     }
     public function create()
     {
         $salesOfficers = $this->clientRepository->getSalesOfficers();
-        return view("admin.client.create" , compact("salesOfficers"));
+        return view("admin.client.create", compact("salesOfficers"));
     }
     public function store(StoreClientRequest $request)
     {
         $this->clientRepository->store($request->all());
-        return redirect()->back()->with("success","Record Created Successfully.");
+        return redirect()->back()->with("success", "Record Created Successfully.");
+    }
+    public function show($id)
+    {
+        $data = $this->clientRepository->show($id);
+        return view('admin.client.show' , compact('data'));
     }
 }

@@ -38,6 +38,7 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
         Route::get('client', 'index')->name('client.index');
         Route::get('client/create', 'create')->name('client.create');
         Route::post('client/store', 'store')->name('client.store');
+        Route::get('client/show/{id}', 'show')->name('client.show');
     });
     Route::controller(ExpenseController::class)->group(function () {
         Route::get('expense', 'index')->name('expense.index');
