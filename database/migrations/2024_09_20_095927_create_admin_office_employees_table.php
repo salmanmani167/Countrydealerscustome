@@ -32,11 +32,11 @@ return new class extends Migration {
             $table->string('designation')->nullable();
             $table->string('department')->nullable();
             $table->string('father_name')->nullable();
-            $table->integer('account_number')->nullable();
+            $table->string('account_number')->nullable();
             $table->integer('loan_amount')->nullable();
             $table->integer('loan_return')->nullable();
             $table->integer('other_allowance')->nullable();
-            $table->integer('cnic')->nullable();
+            $table->string('cnic')->nullable();
             $table->integer('loan_duration')->nullable();
             $table->string('employee_type')->nullable();
             $table->timestamps();
