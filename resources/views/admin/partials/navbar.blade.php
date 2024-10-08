@@ -22,12 +22,23 @@
                         Settings
                     </a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item">
+                    <a class="dropdown-item" id="logoutBtn" style="cursor: pointer">
                         <i class="fas fa-power-off text-primary"></i>
                         Logout
                     </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
                 </div>
             </li>
         </ul>
     </div>
 </nav>
+
+@section('bottom-scripts')
+<script>
+    $('#logoutBtn').on('click' , function(){
+        $('#logout-form').submit();
+    })
+</script>
+@endsection

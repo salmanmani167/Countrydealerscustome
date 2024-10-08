@@ -39,6 +39,8 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
         Route::get('client/create', 'create')->name('client.create');
         Route::post('client/store', 'store')->name('client.store');
         Route::get('client/show/{id}', 'show')->name('client.show');
+        Route::get('client/installments/{id}', 'getInstallments')->name('client.installments');
+        Route::get('client/installment/status/update/{id}', 'installmentUpdate')->name('client.installment.status.update');
     });
     Route::controller(ExpenseController::class)->group(function () {
         Route::get('expense', 'index')->name('expense.index');

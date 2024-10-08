@@ -23,6 +23,7 @@
                                         <th>Client Type</th>
                                         <th>Sale Type</th>
                                         <th>Actions</th>
+                                        <th>Installments</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -34,9 +35,10 @@
                                         <td>{{$data->client_type}}</td>
                                         <td>{{$data->sale_type}}</td>
                                         <td>
-                                            <a href="javascript:;" class="btn btn-primary btn-sm"><i class="fas fa-regular fa-pencil"></i></a>
+                                            {{-- <a href="javascript:;" class="btn btn-primary btn-sm"><i class="fas fa-regular fa-pencil"></i></a> --}}
                                             <a href="{{route('client.show' , $data->id)}}" class="btn btn-warning btn-sm"><i class="fas fa-regular fa-eye"></i></a>
                                         </td>
+                                        <td><a href="{{route('client.installments' , $data->id)}}" class="btn btn-success btn-sm"><i class="fas fa-regular fa-dollar"></i></a></td>
                                     </tr>
                                     @endforeach
                                 </tbody>

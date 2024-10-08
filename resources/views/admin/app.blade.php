@@ -108,6 +108,22 @@
                 }
             });
         }
+        function confirmAction(route) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "This action cannot be undone.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, proceed!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Redirect to the specified route
+                    window.location.href = route;
+                }
+            });
+        }
     </script>
     @if (session()->has('success'))
         <script>

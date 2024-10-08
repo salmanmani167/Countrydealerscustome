@@ -35,4 +35,14 @@ class ClientController extends Controller
         $data = $this->clientRepository->show($id);
         return view('admin.client.show' , compact('data'));
     }
+    public function getInstallments($id)
+    {
+        $data = $this->clientRepository->getInstallments($id);
+        return view('admin.client.installments' , compact('data'));
+    }
+    public function installmentUpdate($id)
+    {
+        $data = $this->clientRepository->updateInstallmentStatus($id);
+        return redirect()->back()->with('success','Status Update Successfully.');
+    }
 }

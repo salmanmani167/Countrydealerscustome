@@ -85,119 +85,141 @@
             </div>
         </div>
     </div>
-    <div class="content-wrapper">
-        <div class="page-header">
-            <h3 class="page-title">
-                Installment Details
-            </h3>
+
+    @if (count($data->installments) > 0)
+        <div class="content-wrapper">
+            <div class="page-header">
+                <h3 class="page-title">
+                    Installment Details
+                </h3>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        @forelse ($data->installments as $installment)
+                            @if ($installment->payment_method === 'cash')
+                                <div class="card-body d-flex justify-content-between">
+                                    <div class="col-md-3">
+                                        <p><strong for="">Payment Type</strong></p>
+                                        {{ $installment->payment_type === 'yes' ? 'Full Payment' : 'Installment' }}
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p><strong for="">Payment Method</strong></p>
+                                        {{ $installment->payment_method }}
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p><strong for="">Installment Payment</strong></p>
+                                        {{ $installment->installment_payment }}
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p><strong for="">Payment Installment Due Date</strong></p>
+                                        {{ Carbon\Carbon::parse($installment->payment_installment_due_date)->format('D-M-Y') }}
+                                    </div>
+                                </div>
+                            @else
+                                <div class="card-body d-flex justify-content-between">
+                                    <div class="col-md-4">
+                                        <p><strong for="">Payment Type</strong></p>
+                                        {{ $installment->payment_type === 'yes' ? 'Full Payment' : 'Installment' }}
+                                    </div>
+                                    <div class="col-md-4">
+                                        <p><strong for="">Payment Method</strong></p>
+                                        {{ $installment->payment_method }}
+                                    </div>
+                                    <div class="col-md-4">
+                                        <p><strong for="">Cheque Image</strong></p>
+                                        <a href="{{ Storage::url($installment->cheque_image) }}" target="_blank"><img
+                                                src="{{ Storage::url($installment->cheque_image) }}" alt="Cheque Image"
+                                                height="20px"></a>
+                                    </div>
+                                </div>
+                                <div class="card-body d-flex">
+                                    <div class="col-md-4">
+                                        <p><strong for="">Cheque Installment Amount</strong></p>
+                                        {{ $installment->cheque_installment_amount }}
+                                    </div>
+                                    <div class="col-md-4">
+                                        <p><strong for="">Cheque Installment Due Date</strong></p>
+                                        {{ Carbon\Carbon::parse($installment->cheque_installment_due_date)->format('D-M-Y') }}
+                                    </div>
+                                </div>
+                            @endif
+                        @empty
+                            <h5 class="text-center m-0 py-4">No data found.</h5>
+                        @endforelse
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="card">
-                    @forelse ($data->installments as $installment)
-                        @if ($installment->payment_method === 'cash')
+    @endif
+
+    @if (count($data->owners) > 0)
+        <div class="content-wrapper">
+            <div class="page-header">
+                <h3 class="page-title">
+                    Other Plot Owners
+                </h3>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        @forelse ($data->owners as $owner)
                             <div class="card-body d-flex justify-content-between">
                                 <div class="col-md-3">
-                                    <p><strong for="">Payment Type</strong></p>
-                                    {{ $installment->payment_type === 'yes' ? 'Full Payment' : 'Installment' }}
+                                    <p><strong for="">Other Owner Name</strong></p>
+                                    {{ $owner->other_owner_name }}
                                 </div>
                                 <div class="col-md-3">
-                                    <p><strong for="">Payment Method</strong></p>
-                                    {{ $installment->payment_method }}
+                                    <p><strong for="">Other Owner Email</strong></p>
+                                    {{ $owner->other_owner_email }}
                                 </div>
                                 <div class="col-md-3">
-                                    <p><strong for="">Installment Payment</strong></p>
-                                    {{ $installment->installment_payment }}
+                                    <p><strong for="">Other Owner Phone</strong></p>
+                                    {{ $owner->other_owner_number }}
                                 </div>
                                 <div class="col-md-3">
-                                    <p><strong for="">Payment Installment Due Date</strong></p>
-                                    {{ Carbon\Carbon::parse($installment->payment_installment_due_date)->format('D-M-Y') }}
+                                    <p><strong for="">Other Owner Father/Husband Name</strong></p>
+                                    {{ $owner->other_owner_father_or_husband_name }}
                                 </div>
+                            </div>
+                        @empty
+                            <h5 class="text-center m-0 py-4">No data found.</h5>
+                        @endforelse
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
+
+    @if (count($data->payments) > 0)
+        <div class="content-wrapper">
+            <div class="page-header">
+                <h3 class="page-title">
+                    Plot Payments
+                </h3>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        @forelse ($data->payments as $payment)
+                            <div class="card-body d-flex justify-content-between">
+                                @if ($payment->payment_method == 'cash')
+                                    <div class="col-md-3">
+                                        <p><strong for="">Payment Type</strong></p>
+                                        {{ $payment->payment_type === 'yes' ? 'Full Payment' : 'Installment' }}
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p><strong for="">Payment Method</strong></p>
+                                        {{ $payment->payment_method }}
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p><strong for="">Full Payment</strong></p>
+                                        {{ $payment->full_payment }}
+                                    </div>
                             </div>
                         @else
                             <div class="card-body d-flex justify-content-between">
-                                <div class="col-md-4">
-                                    <p><strong for="">Payment Type</strong></p>
-                                    {{ $installment->payment_type === 'yes' ? 'Full Payment' : 'Installment' }}
-                                </div>
-                                <div class="col-md-4">
-                                    <p><strong for="">Payment Method</strong></p>
-                                    {{ $installment->payment_method }}
-                                </div>
-                                <div class="col-md-4">
-                                    <p><strong for="">Cheque Image</strong></p>
-                                    <a href="{{ Storage::url($installment->cheque_image) }}" target="_blank"><img
-                                            src="{{ Storage::url($installment->cheque_image) }}" alt="Cheque Image"
-                                            height="20px"></a>
-                                </div>
-                            </div>
-                            <div class="card-body d-flex">
-                                <div class="col-md-4">
-                                    <p><strong for="">Cheque Installment Amount</strong></p>
-                                    {{ $installment->cheque_installment_amount }}
-                                </div>
-                                <div class="col-md-4">
-                                    <p><strong for="">Cheque Installment Due Date</strong></p>
-                                    {{ Carbon\Carbon::parse($installment->cheque_installment_due_date)->format('D-M-Y') }}
-                                </div>
-                            </div>
-                        @endif
-                    @empty
-                        <h5 class="text-center m-0 py-4">No data found.</h5>
-                    @endforelse
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="content-wrapper">
-        <div class="page-header">
-            <h3 class="page-title">
-                Other Plot Owners
-            </h3>
-        </div>
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="card">
-                    @forelse ($data->owners as $owner)
-                        <div class="card-body d-flex justify-content-between">
-                            <div class="col-md-3">
-                                <p><strong for="">Other Owner Name</strong></p>
-                                {{ $owner->other_owner_name }}
-                            </div>
-                            <div class="col-md-3">
-                                <p><strong for="">Other Owner Email</strong></p>
-                                {{ $owner->other_owner_email }}
-                            </div>
-                            <div class="col-md-3">
-                                <p><strong for="">Other Owner Phone</strong></p>
-                                {{ $owner->other_owner_number }}
-                            </div>
-                            <div class="col-md-3">
-                                <p><strong for="">Other Owner Father/Husband Name</strong></p>
-                                {{ $owner->other_owner_father_or_husband_name }}
-                            </div>
-                        </div>
-                    @empty
-                        <h5 class="text-center m-0 py-4">No data found.</h5>
-                    @endforelse
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="content-wrapper">
-        <div class="page-header">
-            <h3 class="page-title">
-                Plot Payments
-            </h3>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    @forelse ($data->payments as $payment)
-                        <div class="card-body d-flex justify-content-between">
-                            @if ($payment->payment_method == 'cash')
-                                <div class="col-md-3">
+                                <div class="col-md-2">
                                     <p><strong for="">Payment Type</strong></p>
                                     {{ $payment->payment_type === 'yes' ? 'Full Payment' : 'Installment' }}
                                 </div>
@@ -206,73 +228,65 @@
                                     {{ $payment->payment_method }}
                                 </div>
                                 <div class="col-md-3">
-                                    <p><strong for="">Full Payment</strong></p>
-                                    {{ $payment->full_payment }}
+                                    <p><strong for="">Cheque Image</strong></p>
+                                    <a href="{{ Storage::url($payment->cheque_image) }}" target="_blank"><img
+                                            src="{{ Storage::url($payment->cheque_image) }}" alt="Cheque Image"
+                                            height="20px"></a>
                                 </div>
-                        </div>
-                    @else
-                        <div class="card-body d-flex justify-content-between">
-                            <div class="col-md-2">
-                                <p><strong for="">Payment Type</strong></p>
-                                {{ $payment->payment_type === 'yes' ? 'Full Payment' : 'Installment' }}
+                                <div class="col-md-2">
+                                    <p><strong for="">Cheque Amount</strong></p>
+                                    {{ $payment->check_amount }}
+                                </div>
+                                <div class="col-md-2">
+                                    <p><strong for="">Due Date</strong></p>
+                                    {{ Carbon\Carbon::parse($payment->due_date)->format('D-M-Y') }}
+                                </div>
                             </div>
-                            <div class="col-md-3">
-                                <p><strong for="">Payment Method</strong></p>
-                                {{ $payment->payment_method }}
-                            </div>
-                            <div class="col-md-3">
-                                <p><strong for="">Cheque Image</strong></p>
-                                <a href="{{ Storage::url($payment->cheque_image) }}" target="_blank"><img
-                                        src="{{ Storage::url($payment->cheque_image) }}" alt="Cheque Image"
-                                        height="20px"></a>
-                            </div>
-                            <div class="col-md-2">
-                                <p><strong for="">Cheque Amount</strong></p>
-                                {{ $payment->check_amount }}
-                            </div>
-                            <div class="col-md-2">
-                                <p><strong for="">Due Date</strong></p>
-                                {{ Carbon\Carbon::parse($payment->due_date)->format('D-M-Y') }}
-                            </div>
-                        </div>
-                    @endif
-                </div>
-            @empty
-                <h5 class="text-center m-0 py-4">No data found.</h5>
-                @endforelse
-            </div>
-        </div>
+                        @endif
+                    </div>
+                @empty
+                    <h5 class="text-center m-0 py-4">No data found.</h5>
+    @endforelse
     </div>
+    </div>
+    </div>
+    @endif
 
-    <div class="content-wraper mt-5">
-        <div class="page-header">
-            <h3 class="page-title">
-                Sales Officers
-            </h3>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    @foreach ($data->saleOfficers as $officers)
-                        <div class="card-body d-flex justify-content-between">
-                            <div class="col-md-4">
-                                <p><strong for="">Name</strong></p>
-                                {{ $officers->officer->name }}
+    @if (count($data->saleOfficers) > 0)
+        <div class="content-wrapper">
+            <div class="page-header">
+                <h3 class="page-title">
+                    Sales Officers
+                </h3>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        @foreach ($data->saleOfficers as $officers)
+                            <div class="card-body d-flex justify-content-between">
+                                <div class="col-md-4">
+                                    <p><strong for="">Name</strong></p>
+                                    {{ $officers->officer->name }}
+                                </div>
+                                <div class="col-md-4">
+                                    <p><strong for="">Commission Type</strong></p>
+                                    {{ $officers->commission_type }}
+                                </div>
+                                <div class="col-md-4">
+                                    <p><strong for="">Commission Amount</strong></p>
+                                    @if($officers->commission_type == 'percent')
+                                    {{ ($officers->commission_amount / 100 ) * $data->plot_price }}
+                                    @else
+                                    {{$officers->commission_amount}}
+                                    @endif
+                                </div>
                             </div>
-                            <div class="col-md-4">
-                                <p><strong for="">Commission Type</strong></p>
-                                {{ $officers->commission_type }}
-                            </div>
-                            <div class="col-md-4">
-                                <p><strong for="">Commission Amount</strong></p>
-                                {{ $officers->commission_amount }}
-                            </div>
-                        </div>
-                    @endforeach
+                        @endforeach
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    @endif
 @endsection
 
 @section('bottom-scripts')

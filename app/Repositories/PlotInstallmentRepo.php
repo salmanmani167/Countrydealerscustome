@@ -13,6 +13,10 @@ class PlotInstallmentRepo
     {
         $this->model = $model;
     }
+    public function find(int $id)
+    {
+        return $this->model->find($id);
+    }
     public function store(array $data, $client_id)
     {
         if ($data["payment_method"] != "cash") {
@@ -58,5 +62,16 @@ class PlotInstallmentRepo
                 $this->model->create($installmentPayment);
             }
         }
+    }
+
+    public function getInstallments($client_id)
+    {
+        return $this->model->where('client_id', $client_id)->get();
+    }
+    public function updateInstallmentStatus($paymentId)
+    {
+        $payment = $this->find($paymentId);
+        $payment->status = 'PAID';
+        $payment->save();
     }
 }

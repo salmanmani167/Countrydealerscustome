@@ -80,4 +80,13 @@ class ClientRepository
     {
         return $this->model->with(['installments' , 'owners' , 'payments' , 'saleOfficers.officer'])->where('id', $Id)->first();
     }
+
+    public function getInstallments($id)
+    {
+        return $this->plotInstallmentRepository->getInstallments($id);
+    }
+    public function updateInstallmentStatus($id)
+    {
+        return $this->plotInstallmentRepository->updateInstallmentStatus($id);
+    }
 }
