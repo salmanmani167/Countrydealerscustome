@@ -30,7 +30,7 @@
         <div class="form-group row">
             <label class="col-sm-3 col-form-label">Number</label>
             <div class="col-sm-9">
-                <input type="number" class="form-control" name="number" value="{{ $data['number'] ?? '' }}"
+                <input type="text" class="form-control" name="number" value="{{ $data['number'] ?? '' }}"
                     placeholder="Number Here">
                 @error('number')
                     <small class="text-danger">{{ $message }}</small>
@@ -105,7 +105,7 @@
         <div class="form-group row">
             <label class="col-sm-3 col-form-label">Plot #</label>
             <div class="col-sm-9">
-                <input type="number" class="form-control" name="plot_number" value="{{ $data['plot_number'] ?? '' }}"
+                <input type="text" class="form-control" name="plot_number" value="{{ $data['plot_number'] ?? '' }}"
                     placeholder="Plot Number">
                 @error('plot_number')
                     <small class="text-danger">{{ $message }}</small>

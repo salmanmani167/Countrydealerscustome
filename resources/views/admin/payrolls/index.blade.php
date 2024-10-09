@@ -40,8 +40,8 @@
                                             <td>{{ $data->other_allowance }}</td>
                                             <td>{{ ($data->salary - $data->loan_return) + $data->other_allowance }}</td>
                                             <td>
-                                                <a href="{{route('payroll.store' , $data->id)}}"
-                                                    class="btn btn-sm btn-outline-primary"><i class="fa-solid fa-check"></i></a>
+                                                <a href="javascript:;"
+                                                    class="btn btn-sm btn-outline-primary" onclick="confirmAction('{{route('payroll.store' , $data->id)}}')"><i class="fa-solid fa-check"></i></a>
                                             </td>
                                             <td>
                                                 <a href="{{route('payroll.history' , $data->id)}}"

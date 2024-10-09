@@ -64,14 +64,43 @@ class PlotInstallmentRepo
         }
     }
 
-    public function getInstallments($client_id)
+    public function getCashInstallments($client_id)
     {
-        return $this->model->where('client_id', $client_id)->get();
+        $record = $this->find($client_id);
+        $value = $record->payment_method;
+        $data = $this->model->where('client_id', $client_id)->where('payment_method' , '=' , $value)->get();
+        return [$data , $value];
     }
     public function updateInstallmentStatus($paymentId)
     {
         $payment = $this->find($paymentId);
         $payment->status = 'PAID';
         $payment->save();
+    }
+
+    public function addCustomCashInstallment($data , $id)
+    {
+        $new = $this->model;
+        $new->client_id = $id;
+        $new->payment_type = 'no';
+        $new->payment_method = 'cash';
+        $new->installment_payment = $data['installment_payment'];
+        $new->payment_installment_due_date = $data['payment_installment_due_date'];
+        $new->save();
+    }
+    public function addCustomChequeInstallment($data , $id)
+    {
+        $new = $this->model;
+        $new->client_id = $id;
+        $new->payment_type = 'no';
+        $new->payment_method = 'cheque';
+        if (isset($data['cheque_image']) && $data['cheque_image']->isValid()) {
+            // Store the image and get the file path
+            $imagePath = $data['cheque_image']->store('cheque_images', 'public');
+        }
+        $new->cheque_image = $imagePath;
+        $new->cheque_installment_amount = $data['cheque_installment_amount'];
+        $new->cheque_installment_due_date = $data['cheque_installment_due_date'];
+        $new->save();
     }
 }
