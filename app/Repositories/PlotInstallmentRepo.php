@@ -66,10 +66,9 @@ class PlotInstallmentRepo
 
     public function getCashInstallments($client_id)
     {
-        $record = $this->find($client_id);
-        $value = $record->payment_method;
-        $data = $this->model->where('client_id', $client_id)->where('payment_method' , '=' , $value)->get();
-        return [$data , $value];
+       $cashInstallments =  $this->model->where('client_id', $client_id)->where('payment_method' , '=' , 'cash')->get();
+       $chequeInstallments =  $this->model->where('client_id', $client_id)->where('payment_method' , '=' , 'cheque')->get();
+       return [$cashInstallments ,$chequeInstallments ];
     }
     public function updateInstallmentStatus($paymentId)
     {

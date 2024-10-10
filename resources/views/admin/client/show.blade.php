@@ -66,15 +66,19 @@
                         </div>
                     </div>
                     <div class="card-body d-flex justify-content-between">
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <p><strong for="">Vehicles Adjustment</strong></p>
                             <label for="">{{ $data->vehicles_adjustment }}</label>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <p><strong for="">Adjustment Price</strong></p>
                             <label for="">{{ $data->adjustment_price }}</label>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
+                            <p><strong for="">Advance Payment</strong></p>
+                            <label for="">{{ $data->advance_payment }}</label>
+                        </div>
+                        <div class="col-md-3">
                             <p><strong for="">Adjustment Product</strong></p>
                             <a href="{{ Storage::url($data->adjustment_product) }}" target="_blank"><img
                                     src="{{ Storage::url($data->adjustment_product) }}" alt="Adjustment Image"

@@ -23,6 +23,8 @@ class StoreClientRequest extends FormRequest
     {
         return [
             "name" => "required",
+            "plot_size" => "required",
+            "cnic" => "required",
             "email" => "required",
             "number" => "required",
             "father_or_husband_name" => "required",

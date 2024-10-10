@@ -28,6 +28,18 @@
     </div>
     <div class="col-md-6">
         <div class="form-group row">
+            <label class="col-sm-3 col-form-label">CNIC</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" name="cnic" value="{{ $data['cnic'] ?? '' }}"
+                    placeholder="CNIC Here">
+                @error('cnic')
+                    <small class="text-danger">{{ $message }}</small>
+                @enderror
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group row">
             <label class="col-sm-3 col-form-label">Number</label>
             <div class="col-sm-9">
                 <input type="text" class="form-control" name="number" value="{{ $data['number'] ?? '' }}"
@@ -42,8 +54,8 @@
         <div class="form-group row">
             <label class="col-sm-3 col-form-label">Fatehr/Husband Name</label>
             <div class="col-sm-9">
-                <input type="text" class="form-control" name="father_or_husband_name" value="{{ $data['father_or_husband_name'] ?? '' }}"
-                    placeholder="Father/Husband Name Here">
+                <input type="text" class="form-control" name="father_or_husband_name"
+                    value="{{ $data['father_or_husband_name'] ?? '' }}" placeholder="Father/Husband Name Here">
                 @error('father_or_husband_name')
                     <small class="text-danger">{{ $message }}</small>
                 @enderror
@@ -115,6 +127,18 @@
     </div>
     <div class="col-md-6">
         <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Plot Size</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" name="plot_size" value="{{ $data['plot_size'] ?? '' }}"
+                    placeholder="Plot Size">
+                @error('plot_size')
+                    <small class="text-danger">{{ $message }}</small>
+                @enderror
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group row">
             <label class="col-sm-3 col-form-label">Location</label>
             <div class="col-sm-9">
                 <input type="text" class="form-control" name="location" value="{{ $data['location'] ?? '' }}"
@@ -141,8 +165,8 @@
         <div class="form-group row">
             <label class="col-sm-3 col-form-label">Plot Demand</label>
             <div class="col-sm-9">
-                <input type="number" class="form-control" name="plot_demand" value="{{ $data['plot_demand'] ?? '' }}"
-                    placeholder="Plot Demand">
+                <input type="number" class="form-control" name="plot_demand"
+                    value="{{ $data['plot_demand'] ?? '' }}" placeholder="Plot Demand">
                 @error('plot_demand')
                     <small class="text-danger">{{ $message }}</small>
                 @enderror
@@ -154,7 +178,7 @@
             <label class="col-sm-3 col-form-label">Plot Sale Price</label>
             <div class="col-sm-9">
                 <input type="number" class="form-control" name="plot_sale_price"
-                    value="{{ $data['plot_sale_price'] ?? '' }}" placeholder="Plot Sale Price">
+                    value="{{ $data['plot_sale_price'] ?? '' }}" placeholder="Plot Sale Price" id="plotSalePrice">
                 @error('plot_sale_price')
                     <small class="text-danger">{{ $message }}</small>
                 @enderror
@@ -163,10 +187,20 @@
     </div>
     <div class="col-md-6">
         <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Agreement (check for agreement)</label>
+            <label class="col-sm-3 col-form-label">Advance Payment</label>
+            <div class="col-sm-9">
+                <input type="number" class="form-control mt-3 ml-1" name="advance_payment" id="advancePayment" placeholder="Advance Payment">
+                @error('advance_payment')
+                    <small class="text-danger">{{ $message }}</small>
+                @enderror
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group row">
+            <label class="col-sm-6 col-form-label">Agreement (check for agreement)</label>
             <div class="">
-                <input type="checkbox" class="form-control mt-3 ml-1" name="agreement"
-                    value="1">
+                <input type="checkbox" class="form-control mt-3 ml-1" name="agreement" value="1">
                 @error('agreement')
                     <small class="text-danger">{{ $message }}</small>
                 @enderror
@@ -192,8 +226,8 @@
         <div class="form-group row">
             <label class="col-sm-3 col-form-label">Price of adjustment</label>
             <div class="col-sm-9">
-                <input type="number" class="form-control" name="adjustment_price"
-                    value="{{ $data['adjustment_price'] ?? '' }}" placeholder="Price Of Adjustment">
+                <input type="text" class="form-control" name="adjustment_price"
+                    value="{{ $data['adjustment_price'] ?? '' }}" placeholder="Price Of Adjustment" id="adjustmentPrice">
                 @error('adjustment_price')
                     <small class="text-danger">{{ $message }}</small>
                 @enderror
@@ -213,6 +247,12 @@
             </div>
         </div>
     </div>
+    <div class="col-md-12" style="display: none" id="priceNoteShow">
+        <div class="alert alert-danger" role="alert">
+            <strong>Note : </strong> <span id="totalCountAlertText"></span>
+        </div>
+    </div>
+
     <div class="col-md-12 my-2">
         <h5 class="">Payment Info</h5>
     </div>

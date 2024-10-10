@@ -33,6 +33,10 @@ class ClientRepository
         return SalesOfficer::all();
     }
 
+    public function find($id)
+    {
+        return $this->model->find($id);
+    }
     public function all()
     {
         return $this->model->all();
@@ -43,6 +47,7 @@ class ClientRepository
         $client = [
             "email" => $data["email"],
             "name" => $data["name"],
+            "cnic" => $data["cnic"],
             "number" => $data["number"],
             "father_or_husband_name" => $data["father_or_husband_name"],
             "paid_by" => $data["paid_by"],
@@ -56,6 +61,8 @@ class ClientRepository
             "agreement" => $data["agreement"],
             "vehicles_adjustment" => $data["vehicles_adjustment"],
             "adjustment_price" => $data["adjustment_price"],
+            "advance_payment" => $data["advance_payment"],
+            "plot_size" => $data["plot_size"],
         ];
         if (isset($data['adjustment_product']) && $data['adjustment_product']->isValid()) {
             $client['adjustment_product'] = $data['adjustment_product']->store('adjustmentproducts', 'public');
@@ -78,9 +85,12 @@ class ClientRepository
     }
     public function show($Id)
     {
-        return $this->model->with(['installments' , 'owners' , 'payments' , 'saleOfficers.officer'])->where('id', $Id)->first();
+        return $this->model->with(['installments', 'owners', 'payments', 'saleOfficers.officer'])->where('id', $Id)->first();
     }
-
+    public function delete($id)
+    {
+        $this->find($id)->delete();
+    }
     public function getCashInstallments($id)
     {
         return $this->plotInstallmentRepository->getCashInstallments($id);

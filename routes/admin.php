@@ -43,6 +43,8 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
         Route::get('client/installment/status/update/{id}', 'installmentUpdate')->name('client.installment.status.update');
         Route::post('add/custom/cash/installment/{id}', 'addNewCashInstallment')->name('add.custom.cash.installment');
         Route::post('add/custom/cheque/installment/{id}', 'addNewChequeInstallment')->name('add.custom.cheque.installment');
+        Route::get('client/delete/{id}', 'delete')->name('client.delete');
+        Route::get('client/print/{id}', 'print')->name('client.print');
     });
     Route::controller(ExpenseController::class)->group(function () {
         Route::get('expense', 'index')->name('expense.index');

@@ -187,54 +187,53 @@
                 e.preventDefault();
                 $('#sales_officer_box').append(
                     `<div class="row col-md-12 officer-row">
-                    <div class="col-md-4">
-        <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Officer</label>
-            <div class="">
-                <select name="sales_officer_id[]" id="" class="form-control">
-                    <option selected disabled>-- select sales officer --</option>
-                    @foreach ($salesOfficers as $salesOfficer)
-                        <option value="{{ $salesOfficer->id }}">{{ $salesOfficer->name }}</option>
-                    @endforeach
-                </select>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Type</label>
-            <div class="col-sm-9">
-                <select name="commission_type[]" id="" class="form-control">
-                    <option selected disabled>-- select type --</option>
-                    <option value="percent">Percent</option>
-                    <option value="cash">Cash</option>
-                </select>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="form-group row">
-            <label class="col-sm-4 col-form-label">Commission</label>
-            <div class="col-sm-8">
-                <input type="number" class="form-control" placeholder="Commission here" name="commission_amount[]">
-            </div>
-        </div>
-    </div>
-                    <div class="col-md-1">
-                        <div class="form-group row">
-                            <div class="col-sm-9">
-                                <button class="btn btn-sm btn-danger delete-officer">Delete</button>
+                        <div class="col-md-4">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Officer</label>
+                                <div class="">
+                                    <select name="sales_officer_id[]" id="" class="form-control">
+                                        <option selected disabled>-- select sales officer --</option>
+                                        @foreach ($salesOfficers as $salesOfficer)
+                                            <option value="{{ $salesOfficer->id }}">{{ $salesOfficer->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>`
+                        <div class="col-md-3">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Type</label>
+                                <div class="col-sm-9">
+                                    <select name="commission_type[]" id="" class="form-control">
+                                        <option selected disabled>-- select type --</option>
+                                        <option value="percent">Percent</option>
+                                        <option value="cash">Cash</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label">Commission</label>
+                                <div class="col-sm-8">
+                                    <input type="number" class="form-control" placeholder="Commission here" name="commission_amount[]">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-1">
+                            <div class="form-group row">
+                                <div class="col-sm-9">
+                                    <button class="btn btn-sm btn-danger delete-officer">Delete</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`
                 )
                 $(document).on('click', '.delete-officer', function(e) {
                     e.preventDefault();
                     $(this).closest('.officer-row').remove();
                 });
             })
-            let count = 0;
             $(document).on('click', '#add_more_owners', function(e) {
                 e.preventDefault();
                 count += 1;
@@ -289,7 +288,27 @@
                 </div>
                 `)
             })
+
+            function getResults() {
+                let adjustmentPrice = parseFloat($('#adjustmentPrice').val()) || 0;
+                let advancePayment = parseFloat($('#advancePayment').val()) || 0;
+                let plotSalePrice = parseFloat($('#plotSalePrice').val()) || 0;
+                let totalPrice = (plotSalePrice) - (adjustmentPrice + advancePayment);
+                $('#totalCountAlertText').text('Remaining Amount For Installments ' + totalPrice);
+            }
+            $(document).on('input', '#advancePayment', function() {
+                $('#priceNoteShow').show()
+                getResults()
+            })
+            $(document).on('input', '#adjustmentPrice', function() {
+                $('#priceNoteShow').show()
+                getResults()
+            })
+            $(document).on('input', '#plotSalePrice', function() {
+                $('#priceNoteShow').show()
+                getResults()
+            })
+
         })
     </script>
 @endsection
-

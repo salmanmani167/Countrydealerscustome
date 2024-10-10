@@ -40,12 +40,17 @@ class ClientController extends Controller
         $data = $this->clientRepository->show($id);
         return view('admin.client.show', compact('data'));
     }
+    public function delete($id)
+    {
+        $this->clientRepository->delete($id);
+        return redirect('admin/client')->with('success','Record Deleted Successfully.');
+    }
     public function getInstallments($id)
     {
         $data = $this->clientRepository->getCashInstallments($id);
-        $newdata = $data[0];
-        $paymentMethod = $data[1];
-        return view('admin.client.installments', compact('newdata', 'paymentMethod', 'id'));
+        $chequeInstallments = $data[1];
+        $cashInstallments = $data[0];
+        return view('admin.client.installments', compact( 'id' , 'chequeInstallments' , 'cashInstallments'));
     }
     public function installmentUpdate($id)
     {
@@ -62,5 +67,11 @@ class ClientController extends Controller
     {
         $this->plotInstallmentRepository->addCustomChequeInstallment($data, $id);
         return redirect()->back()->with('success','Record Added Successfully.');
+    }
+
+    public function print($id)
+    {
+        $data = $this->clientRepository->show($id);
+        return view('admin.client.print' , compact('data'));
     }
 }
