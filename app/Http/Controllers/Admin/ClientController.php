@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreClientRequest;
+use App\Http\Requests\UpdateClientRequest;
 use Illuminate\Http\Request;
 use App\Repositories\ClientRepository;
 use App\Repositories\PlotInstallmentRepo;
@@ -39,6 +40,16 @@ class ClientController extends Controller
     {
         $data = $this->clientRepository->show($id);
         return view('admin.client.show', compact('data'));
+    }
+    public function edit($id)
+    {
+        $data = $this->clientRepository->show($id);
+        return view('admin.client.edit', compact('data'));
+    }
+    public function update(UpdateClientRequest $request, $id)
+    {
+        $this->clientRepository->update($request->all(), $id);
+        return redirect()->back()->with('success','Record Updated Successfully.');
     }
     public function delete($id)
     {

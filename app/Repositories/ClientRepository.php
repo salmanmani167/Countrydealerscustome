@@ -87,6 +87,33 @@ class ClientRepository
     {
         return $this->model->with(['installments', 'owners', 'payments', 'saleOfficers.officer'])->where('id', $Id)->first();
     }
+    public function update($data , $Id)
+    {
+        $record = $this->model->find( $Id);
+        $client = [
+            "email" => $data["email"],
+            "name" => $data["name"],
+            "cnic" => $data["cnic"],
+            "number" => $data["number"],
+            "father_or_husband_name" => $data["father_or_husband_name"],
+            "paid_by" => $data["paid_by"],
+            "plot_number" => $data["plot_number"],
+            "location" => $data["location"],
+            "plot_price" => $data["plot_price"],
+            "plot_demand" => $data["plot_demand"],
+            "plot_sale_price" => $data["plot_sale_price"],
+            "client_type" => $data["client_type"],
+            "sale_type" => $data["sale_type"],
+            "vehicles_adjustment" => $data["vehicles_adjustment"],
+            "adjustment_price" => $data["adjustment_price"],
+            "advance_payment" => $data["advance_payment"],
+            "plot_size" => $data["plot_size"],
+        ];
+        if (isset($data['adjustment_product']) && $data['adjustment_product']->isValid()) {
+            $client['adjustment_product'] = $data['adjustment_product']->store('adjustmentproducts', 'public');
+        }
+        $record->update($client);
+    }
     public function delete($id)
     {
         $this->find($id)->delete();

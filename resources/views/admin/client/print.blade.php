@@ -13,11 +13,12 @@
 </head>
 
 <body>
-    <main class=" px-3" style="border : 2px solid black">
+    <main class="px-3" style="border : 2px solid black">
+        <button class="btn btn-sm btn-primary mt-2" id="printButton">Print</button>
         <div class="logo d-flex justify-content-end">
             <img src="{{ asset('assets/images/COUNTRY DEALERS LOGO AZ.svg') }}" alt="Logo Image" height="50px">
         </div>
-        <h4 class="text-center"><u>Payment Receipt</u></h4>
+        <h6 class="text-center"><u>Payment Receipt</u></h6>
         <p class="text-end"> <u>Date:{{ date('d/m/y') }}</u> </p>
         <p> <u>Paid By : <input type="text" value="{{ $data->name }}"
                     style="border:none; border-bottom: 1px solid black; outline:none; background:transparent;outline: none;position: relative; bottom: 4px;">
@@ -25,8 +26,7 @@
         <p> <u>CNIC : {{ $data->cnic }}</u> </p>
         <p> <u>Plot Size : {{ $data->plot_size }}</u> </p>
         <p> <u>Location : {{ $data->location }}</u> </p>
-
-        <div class="d-flex justify-content-center mt-5">
+        <div class="d-flex justify-content-center">
             <p style="width: 80%"> Dear Sir/Madam, <br>
                 This is here by acknowledge that Country Dealers & Developers has Received Rs.
                 {{ $newInstallment->installment_payment }}/-
@@ -41,12 +41,11 @@
                 Your Payment Status is as Follows:
             </p>
         </div>
-
-        <div class="d-flex justify-content-center align-items-center flex-column my-5">
-            <div class="d-flex justify-content-between mb-3" style="width: 40%;border-bottom: 1px solid black">
+        <div class="d-flex justify-content-center align-items-center flex-column">
+            <div class="d-flex justify-content-between" style="width: 60%;border-bottom: 1px solid black">
                 <span> Total Price of Plot/Farm House/Hut:</span> <span>{{ $data->plot_sale_price }} </span>
             </div>
-            <div class="d-flex justify-content-between mb-3" style="width: 40%;border-bottom: 1px solid black">
+            <div class="d-flex justify-content-between" style="width: 60%;border-bottom: 1px solid black">
                 <span>Previous Paid: </span> <span>
                     @php
                         $totalAmount = 0;
@@ -62,19 +61,19 @@
                     {{ $totalAmount }}
                 </span>
             </div>
-            <div class="d-flex justify-content-between mb-3" style="width: 40%;border-bottom: 1px solid black">
+            <div class="d-flex justify-content-between" style="width: 60%;border-bottom: 1px solid black">
                 <span> <b>Now Paid:</b> </span>
                 <span>
                     <b>{{ $newInstallment->installment_payment }}</b>
                 </span>
             </div>
-            <div class="d-flex justify-content-between mb-3" style="width: 40%;border-bottom: 1px solid black">
+            <div class="d-flex justify-content-between" style="width: 60%;border-bottom: 1px solid black">
                 <span>Total Paid (new): </span>
                 <span>
                     {{ $newInstallment->installment_payment + $totalAmount }}
                 </span>
             </div>
-            <div class="d-flex justify-content-between mb-3" style="width: 40%;border-bottom: 1px solid black">
+            <div class="d-flex justify-content-between" style="width: 60%;border-bottom: 1px solid black">
                 <span> Total remaining Amount: </span>
                 <span>
                     @php
@@ -95,8 +94,8 @@
                 @if (
                     ($installment->status == null && $installment->payment_method == 'cash') ||
                         ($installment->status == null && $installment->payment_method == 'cheque'))
-                    <div class="d-flex justify-content-between mb-3"
-                        style="width: 40%; border-bottom: 1px solid black;">
+                    <div class="d-flex justify-content-between"
+                        style="width: 60%; border-bottom: 1px solid black;">
                         <span>Next Payment Due Date: </span>
                         <span class="text-danger fw-bolder">
                             @if ($installment->payment_method == 'cash')
@@ -109,7 +108,7 @@
                 @break
             @endif
         @endforeach
-        <div class="d-flex justify-content-between mb-3" style="width: 40%;border-bottom: 1px solid black">
+        <div class="d-flex justify-content-between mb-1" style="width: 60%;border-bottom: 1px solid black">
             <span> Properties/Vehicle Adjusted: </span>
             <span>
                 {{ $data->adjustment_price }}
@@ -126,18 +125,15 @@
                 <span>CEO Murree Resorts</span>
             </div>
         </div>
-
-        <div class="bg-primary py-3 w-100 mt-4">
+        <div class="bg-primary py-2 w-100">
         </div>
         <div class="d-flex justify-content-start align-items-start w-100">
-            <ul type="square" class="mt-4">
+            <ul type="square" class="mt-1">
                 <li>+92512321790-91</li>
                 <li>Main Murree Road Near BOP Bhara Kahu, Islamabad </li>
                 <li><a href="https://www.CountryDealers.com" target="_blank">www.CountryDealers.com</a></li>
             </ul>
         </div>
-
-        <button class="btn btn-sm btn-primary" id="printButton">Print</button>
     </div>
 </main>
 <footer>
@@ -169,6 +165,7 @@
         });
 
         $('#printButton').on('click' , function() {
+            $(this).hide();
             print();
         })
     });

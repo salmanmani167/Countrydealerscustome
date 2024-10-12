@@ -39,7 +39,11 @@
                                                     <i class="fas fa-regular fa-trash"></i>
                                                 </a>
                                                 <a href="{{ route('client.show', $data->id) }}"
-                                                    class="btn btn-warning btn-sm"><i class="fas fa-regular fa-eye"></i></a>
+                                                    class="btn btn-warning btn-sm"><i class="fas fa-regular fa-eye"></i>
+                                                </a>
+                                                <a href="{{ route('client.edit', $data->id) }}"
+                                                    class="btn btn-primary btn-sm"><i class="fas fa-regular fa-pencil"></i>
+                                                </a>
                                             </td>
                                             <td><a href="{{ route('client.installments', $data->id) }}"
                                                     class="btn btn-success btn-sm"><i
