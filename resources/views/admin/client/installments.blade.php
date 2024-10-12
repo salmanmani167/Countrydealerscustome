@@ -46,7 +46,10 @@
                                             @if ($installment->status == 'PAID')
                                                 <button class="btn btn-sm btn-success" disabled>Paid</button>
                                                 {{-- this id is client id --}}
-                                                <a href="{{route('client.print' , $id)}}" class="btn btn-outline-primary btn-sm">
+                                                <a href="{{ route('client.print',
+                                                ['client_id' => $id, 'installment_id' => $installment->id ]
+                                                ) }}"
+                                                    class="btn btn-outline-primary btn-sm" target="_blank">
                                                     <i class="fas fa-solid fa-print"></i>
                                                 </a>
                                             @else
@@ -70,7 +73,8 @@
             <h3 class="page-title">
                 Cheque Installment Details
             </h3>
-            <a href="javascript:;" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#chequechequeInstallmentModal">+ New</a>
+            <a href="javascript:;" class="btn btn-primary btn-sm" data-toggle="modal"
+                data-target="#chequechequeInstallmentModal">+ New</a>
         </div>
         <div class="row">
             <div class="col-lg-12">

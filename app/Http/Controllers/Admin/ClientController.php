@@ -69,9 +69,10 @@ class ClientController extends Controller
         return redirect()->back()->with('success','Record Added Successfully.');
     }
 
-    public function print($id)
+    public function print($client_id , $installment_id)
     {
-        $data = $this->clientRepository->show($id);
-        return view('admin.client.print' , compact('data'));
+        $data = $this->clientRepository->show($client_id);
+        $newInstallment = $this->plotInstallmentRepository->find($installment_id);
+        return view('admin.client.print' , compact('data' , 'newInstallment'));
     }
 }
