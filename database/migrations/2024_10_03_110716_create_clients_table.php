@@ -15,12 +15,14 @@ return new class extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->string('email')->nullable();
-            $table->integer('number')->nullable();
+            $table->string('number')->nullable();
+            $table->string('cnic')->nullable();
             $table->string('father_or_husband_name')->nullable();
             $table->string('client_type')->nullable();
             $table->string('sale_type')->nullable();
+            $table->string('plot_size')->nullable();
             $table->string('paid_by')->nullable();
-            $table->integer('plot_number')->nullable();
+            $table->string('plot_number')->nullable();
             $table->string('location')->nullable();
             $table->integer('plot_price')->nullable();
             $table->integer('plot_demand')->nullable();
@@ -28,6 +30,7 @@ return new class extends Migration
             $table->string('agreement')->nullable();
             $table->string('vehicles_adjustment')->nullable();
             $table->integer('adjustment_price')->nullable();
+            $table->integer('advance_payment')->nullable();
             $table->string('adjustment_product')->nullable();
             $table->timestamps();
         });
