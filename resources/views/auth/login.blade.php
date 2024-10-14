@@ -24,12 +24,12 @@
                                     <input type="email" class="form-control form-control-lg border-left-0"
                                         id="exampleInputEmail" placeholder="Email" name="email"
                                         value="{{ old('email') }}" required>
-                                    @error('email')
-                                        <span class="text-danger">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
                                 </div>
+                                @error('email')
+                                    <span class="text-danger">
+                                        <small>{{ $message }}</small>
+                                    </span>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputPassword">Password</label>
@@ -41,12 +41,12 @@
                                     </div>
                                     <input type="password" class="form-control form-control-lg border-left-0"
                                         id="exampleInputPassword" placeholder="Password" name="password" required>
-                                    @error('password')
-                                        <span class="text-danger">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
                                 </div>
+                                @error('password')
+                                    <span class="text-danger">
+                                        <small>{{ $message }}</small>
+                                    </span>
+                                @enderror
                             </div>
                             <div class="my-2 d-flex justify-content-between align-items-center">
                                 <div class="form-check">
@@ -61,7 +61,7 @@
                                 <button class="btn btn-block btn-primary btn-lg auth-form-btn">LOGIN</button>
                             </div>
                             <div class="text-center mt-4 font-weight-light">
-                                Don't have an account? <a href="{{route('register')}}" class="text-primary">Create</a>
+                                Don't have an account? <a href="{{ route('register') }}" class="text-primary">Create</a>
                             </div>
                         </form>
                     </div>

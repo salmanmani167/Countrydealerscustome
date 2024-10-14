@@ -40,6 +40,12 @@
                 <span class="menu-title">Client</span>
             </a>
         </li>
+        <li class="nav-item {{ Request::is('admin/purchase') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('purchase.index') }}">
+                <i class="fa-solid fa-cart-shopping menu-icon"></i>
+                <span class="menu-title">Purchase</span>
+            </a>
+        </li>
         <li class="nav-item {{ Request::is('admin/expense') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('expense.index') }}">
                 <i class="fa-solid fa-dollar-sign menu-icon"></i>

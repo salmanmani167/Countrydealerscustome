@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\EmployeePayrollController;
 use App\Http\Controllers\Admin\ExpenseController;
 use App\Http\Controllers\Admin\OfficeEmployeeController;
 use App\Http\Controllers\Admin\PayrollHistoryControlelr;
+use App\Http\Controllers\Admin\PurchaseController;
 use App\Http\Controllers\Admin\SalesOfficerController;
 use Illuminate\Support\Facades\Route;
 
@@ -50,6 +51,11 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     });
     Route::controller(ExpenseController::class)->group(function () {
         Route::get('expense', 'index')->name('expense.index');
+    });
+    Route::controller(PurchaseController::class)->group(function () {
+        Route::get('purchase', 'index')->name('purchase.index');
+        Route::get('purchase/create', 'create')->name('purchase.create');
+        Route::post('purchase/store', 'store')->name('purchase.store');
     });
     Route::controller(SalesOfficerController::class)->group(function () {
         Route::get('sales/officer', 'index')->name('sales.officer.index');

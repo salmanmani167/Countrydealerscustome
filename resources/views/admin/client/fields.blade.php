@@ -4,7 +4,7 @@
     </div>
     <div class="col-md-6">
         <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Name</label>
+            <label class="col-sm-3 col-form-label">Name <sup class="text-danger">*</sup> </label>
             <div class="col-sm-9">
                 <input type="text" class="form-control" name="name" value="{{ $data['name'] ?? old('name') }}"
                     placeholder="Name Here">
@@ -16,7 +16,7 @@
     </div>
     <div class="col-md-6">
         <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Email</label>
+            <label class="col-sm-3 col-form-label">Email <sup class="text-danger">*</sup></label>
             <div class="col-sm-9">
                 <input type="text" class="form-control" name="email" value="{{ $data['email'] ?? old('email') }}"
                     placeholder="Email Here">
@@ -28,7 +28,7 @@
     </div>
     <div class="col-md-6">
         <div class="form-group row">
-            <label class="col-sm-3 col-form-label">CNIC</label>
+            <label class="col-sm-3 col-form-label">CNIC <sup class="text-danger">*</sup></label>
             <div class="col-sm-9">
                 <input type="text" class="form-control" name="cnic" value="{{ $data['cnic'] ?? old('cnic') }}"
                     placeholder="CNIC Here">
@@ -40,7 +40,7 @@
     </div>
     <div class="col-md-6">
         <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Number</label>
+            <label class="col-sm-3 col-form-label">Number <sup class="text-danger">*</sup></label>
             <div class="col-sm-9">
                 <input type="text" class="form-control" name="number" value="{{ $data['number'] ?? old('number') }}"
                     placeholder="Number Here">
@@ -52,7 +52,7 @@
     </div>
     <div class="col-md-6">
         <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Fatehr/Husband Name</label>
+            <label class="col-sm-3 col-form-label">Fatehr/Husband Name <sup class="text-danger">*</sup></label>
             <div class="col-sm-9">
                 <input type="text" class="form-control" name="father_or_husband_name"
                     value="{{ $data['father_or_husband_name'] ?? old('father_or_husband_name') }}" placeholder="Father/Husband Name Here">
@@ -67,7 +67,7 @@
     </div>
     <div class="col-md-6">
         <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Client Type</label>
+            <label class="col-sm-3 col-form-label">Client Type <sup class="text-danger">*</sup></label>
             <div class="col-sm-9">
                 <select class="form-control" name="client_type">
                     <option disabled selected>-- select an option --</option>
@@ -85,7 +85,7 @@
     </div>
     <div class="col-md-6">
         <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Sale Type</label>
+            <label class="col-sm-3 col-form-label">Sale Type <sup class="text-danger">*</sup></label>
             <div class="col-sm-9">
                 <select class="form-control" name="sale_type">
                     <option disabled selected>-- select an option --</option>
@@ -103,7 +103,7 @@
     </div>
     <div class="col-md-6">
         <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Paid By</label>
+            <label class="col-sm-3 col-form-label">Paid By <sup class="text-danger">*</sup></label>
             <div class="col-sm-9">
                 <input type="text" class="form-control" name="paid_by" value="{{ $data['paid_by'] ?? old('paid_by') }}"
                     placeholder="Paid by">
@@ -115,7 +115,7 @@
     </div>
     <div class="col-md-6">
         <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Plot #</label>
+            <label class="col-sm-3 col-form-label">Plot # <sup class="text-danger">*</sup></label>
             <div class="col-sm-9">
                 <input type="text" class="form-control" name="plot_number" value="{{ $data['plot_number'] ?? old('plot_number') }}"
                     placeholder="Plot Number">
@@ -127,7 +127,7 @@
     </div>
     <div class="col-md-6">
         <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Plot Size</label>
+            <label class="col-sm-3 col-form-label">Plot Size <sup class="text-danger">*</sup></label>
             <div class="col-sm-9">
                 <input type="text" class="form-control" name="plot_size" value="{{ $data['plot_size'] ?? old('plot_size') }}"
                     placeholder="Plot Size">
@@ -139,7 +139,7 @@
     </div>
     <div class="col-md-6">
         <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Location</label>
+            <label class="col-sm-3 col-form-label">Location <sup class="text-danger">*</sup></label>
             <div class="col-sm-9">
                 <input type="text" class="form-control" name="location" value="{{ $data['location'] ?? old('location') }}"
                     placeholder="location here">
@@ -151,7 +151,7 @@
     </div>
     <div class="col-md-6">
         <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Plot Price</label>
+            <label class="col-sm-3 col-form-label">Plot Price <sup class="text-danger">*</sup></label>
             <div class="col-sm-9">
                 <input type="number" class="form-control" name="plot_price" value="{{ $data['plot_price'] ?? old('plot_price') }}"
                     placeholder="Plot price">
@@ -163,7 +163,7 @@
     </div>
     <div class="col-md-6">
         <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Plot Demand</label>
+            <label class="col-sm-3 col-form-label">Plot Demand <sup class="text-danger">*</sup></label>
             <div class="col-sm-9">
                 <input type="number" class="form-control" name="plot_demand"
                     value="{{ $data['plot_demand'] ?? old('plot_demand') }}" placeholder="Plot Demand">
@@ -175,7 +175,7 @@
     </div>
     <div class="col-md-6">
         <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Plot Sale Price</label>
+            <label class="col-sm-3 col-form-label">Plot Sale Price <sup class="text-danger">*</sup></label>
             <div class="col-sm-9">
                 <input type="number" class="form-control" name="plot_sale_price"
                     value="{{ $data['plot_sale_price'] ?? old('plot_sale_price') }}" placeholder="Plot Sale Price" id="plotSalePrice">
@@ -198,7 +198,7 @@
     </div>
     <div class="col-md-6">
         <div class="form-group row">
-            <label class="col-sm-6 col-form-label">Agreement (check for agreement)</label>
+            <label class="col-sm-6 col-form-label">Agreement (check for agreement) <sup class="text-danger">*</sup></label>
             <div class="">
                 <input type="checkbox" class="form-control mt-3 ml-1" name="agreement" value="1">
                 @error('agreement')
@@ -256,7 +256,7 @@
     </div>
     <div class="col-md-6">
         <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Select Payment Type</label>
+            <label class="col-sm-3 col-form-label">Select Payment Type <sup class="text-danger">*</sup></label>
             <div class="col-sm-9">
                 <select name="payment_type" id="payment_type" class="form-control">
                     <option disabled selected>-- selelc if payment is full or not --</option>
