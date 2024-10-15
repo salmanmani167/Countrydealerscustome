@@ -1,5 +1,5 @@
-<div class="modal fade" id="chequechequeInstallmentModal" tabindex="-1" role="dialog" aria-labelledby="chequechequeInstallmentModalLabel"
-    aria-hidden="true">
+<div class="modal fade" id="chequechequeInstallmentModal" tabindex="-1" role="dialog"
+    aria-labelledby="chequechequeInstallmentModalLabel" aria-hidden="true">
 
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -9,7 +9,8 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="{{ route('add.custom.cheque.installment', $id) }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('add.custom.cheque.installment', $id) }}" method="post"
+                enctype="multipart/form-data">
                 <div class="modal-body">
                     <div class="row">
                         @csrf
@@ -17,7 +18,10 @@
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Picture of cheque</label>
                                 <div class="col-sm-9">
-                                    <input type="file" class="form-control" name="cheque_image" accept="image/*" required>
+                                    <input type="file" class="form-control" name="cheque_image" accept="image/*">
+                                    @error('cheque_image')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -25,7 +29,11 @@
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Amount</label>
                                 <div class="col-sm-9">
-                                    <input type="number" class="form-control" name="cheque_installment_amount" placeholder="Amount here" required>
+                                    <input type="number" class="form-control" name="cheque_installment_amount"
+                                        placeholder="Amount here">
+                                        @error('cheque_installment_amount')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
                                 </div>
                             </div>
                         </div>
@@ -33,7 +41,10 @@
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Due Date</label>
                                 <div class="col-sm-9">
-                                    <input type="date" class="form-control" name="cheque_installment_due_date" required>
+                                    <input type="date" class="form-control" name="cheque_installment_due_date">
+                                    @error('cheque_installment_due_date')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
                             </div>
                         </div>

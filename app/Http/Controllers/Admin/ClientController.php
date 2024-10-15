@@ -49,19 +49,19 @@ class ClientController extends Controller
     public function update(UpdateClientRequest $request, $id)
     {
         $this->clientRepository->update($request->all(), $id);
-        return redirect()->back()->with('success','Record Updated Successfully.');
+        return redirect()->back()->with('success', 'Record Updated Successfully.');
     }
     public function delete($id)
     {
         $this->clientRepository->delete($id);
-        return redirect('admin/client')->with('success','Record Deleted Successfully.');
+        return redirect('admin/client')->with('success', 'Record Deleted Successfully.');
     }
     public function getInstallments($id)
     {
         $data = $this->clientRepository->getCashInstallments($id);
         $chequeInstallments = $data[1];
         $cashInstallments = $data[0];
-        return view('admin.client.installments', compact( 'id' , 'chequeInstallments' , 'cashInstallments'));
+        return view('admin.client.installments', compact('id', 'chequeInstallments', 'cashInstallments'));
     }
     public function installmentUpdate($id)
     {
@@ -71,19 +71,27 @@ class ClientController extends Controller
 
     public function addNewCashInstallment(Request $data, $id)
     {
-        $this->plotInstallmentRepository->addCustomCashInstallment($data, $id);
-        return redirect()->back()->with('success','Record Added Successfully.');
+        $customCashInstallment = $this->plotInstallmentRepository->addCustomCashInstallment($data, $id);
+        if ($customCashInstallment == false) {
+            return redirect()->back()->with('error', 'Installment Amount Is More Than Total Amount.');
+        } else {
+            return redirect()->back()->with('success', 'Record Added Successfully.');
+        }
     }
     public function addNewChequeInstallment(Request $data, $id)
     {
-        $this->plotInstallmentRepository->addCustomChequeInstallment($data, $id);
-        return redirect()->back()->with('success','Record Added Successfully.');
+        $customChequeInstallment = $this->plotInstallmentRepository->addCustomChequeInstallment($data, $id);
+        if ($customChequeInstallment == false) {
+            return redirect()->back()->with('error', 'Installment Amount Is More Than Total Amount.');
+        } else {
+            return redirect()->back()->with('success', 'Record Added Successfully.');
+        }
     }
 
-    public function print($client_id , $installment_id)
+    public function print($client_id, $installment_id)
     {
         $data = $this->clientRepository->show($client_id);
         $newInstallment = $this->plotInstallmentRepository->find($installment_id);
-        return view('admin.client.print' , compact('data' , 'newInstallment'));
+        return view('admin.client.print', compact('data', 'newInstallment'));
     }
 }

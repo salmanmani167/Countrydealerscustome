@@ -3,7 +3,9 @@
 namespace App\Repositories;
 
 
+use App\Models\Client;
 use App\Models\PlotInstallment;
+use Illuminate\Support\Facades\Validator;
 
 class PlotInstallmentRepo
 {
@@ -66,9 +68,9 @@ class PlotInstallmentRepo
 
     public function getCashInstallments($client_id)
     {
-       $cashInstallments =  $this->model->where('client_id', $client_id)->where('payment_method' , '=' , 'cash')->get();
-       $chequeInstallments =  $this->model->where('client_id', $client_id)->where('payment_method' , '=' , 'cheque')->get();
-       return [$cashInstallments ,$chequeInstallments ];
+        $cashInstallments = $this->model->where('client_id', $client_id)->where('payment_method', '=', 'cash')->get();
+        $chequeInstallments = $this->model->where('client_id', $client_id)->where('payment_method', '=', 'cheque')->get();
+        return [$cashInstallments, $chequeInstallments];
     }
     public function updateInstallmentStatus($paymentId)
     {
@@ -77,8 +79,37 @@ class PlotInstallmentRepo
         $payment->save();
     }
 
-    public function addCustomCashInstallment($data , $id)
+    public function checkBalanceForInstallments($data, $id, $paymentField)
     {
+        $installmentData = $data->all();
+        $client = Client::find($id);
+        $totalInstallments = $this->model::where('client_id', $id)
+            ->selectRaw('COALESCE(SUM(cheque_installment_amount), 0) as cheque_sum, COALESCE(SUM(installment_payment), 0) as installment_sum')
+            ->first();
+        $finalTotal = $totalInstallments->cheque_sum + $totalInstallments->installment_sum;
+        $remainingBalance = $client->plot_sale_price - ($client->adjustment_price + $client->advance_payment + $finalTotal);
+        // dd((int) $remainingBalance);
+        if ((int) $installmentData[$paymentField] > (int) $remainingBalance) {
+            return false;
+        } else {
+            return true;
+        }
+        if ((int) $finalTotal > (int) $remainingBalance) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+    public function addCustomCashInstallment($data, $id)
+    {
+        $data->validate([
+            'installment_payment' => 'required',
+            'payment_installment_due_date' => 'required',
+        ]);
+        $checkBalance = $this->checkBalanceForInstallments($data, $id, 'installment_payment');
+        if ($checkBalance == false) {
+            return false;
+        }
         $new = $this->model;
         $new->client_id = $id;
         $new->payment_type = 'no';
@@ -86,9 +117,19 @@ class PlotInstallmentRepo
         $new->installment_payment = $data['installment_payment'];
         $new->payment_installment_due_date = $data['payment_installment_due_date'];
         $new->save();
+        return true;
     }
-    public function addCustomChequeInstallment($data , $id)
+    public function addCustomChequeInstallment($data, $id)
     {
+        $data->validate([
+            'cheque_installment_amount' => 'required|string|max:255',
+            'cheque_image' => 'required|image',
+            'cheque_installment_due_date' => 'required',
+        ]);
+        $checkBalance = $this->checkBalanceForInstallments($data, $id, 'cheque_installment_amount');
+        if ($checkBalance == false) {
+            return false;
+        }
         $new = $this->model;
         $new->client_id = $id;
         $new->payment_type = 'no';
@@ -101,5 +142,6 @@ class PlotInstallmentRepo
         $new->cheque_installment_amount = $data['cheque_installment_amount'];
         $new->cheque_installment_due_date = $data['cheque_installment_due_date'];
         $new->save();
+        return true;
     }
 }

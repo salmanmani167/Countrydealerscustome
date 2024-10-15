@@ -37,7 +37,6 @@ class StoreClientRequest extends FormRequest
             "client_type" => "required",
             "sale_type" => "required",
             "agreement" => "accepted",
-            "payment_type" => "required",
         ];
     }
 }

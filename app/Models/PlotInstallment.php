@@ -9,4 +9,9 @@ class PlotInstallment extends Model
 {
     protected $guarded = [];
     use HasFactory;
+
+    protected $casts = [     // Cast price to float
+        'cheque_installment_amount' => 'integer', // Cast quantity to integer
+        'installment_payment' => 'integer',
+    ];
 }

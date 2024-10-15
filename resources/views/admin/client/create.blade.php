@@ -6,8 +6,8 @@
                 Clients
             </h3>
         </div>
-        <div class="card">
-            <div class="card-body">
+        {{-- <div class="card"> --}}
+            {{-- <div class="card-body"> --}}
                 <form action="{{ route('client.store') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     @include('admin.client.fields')
@@ -17,8 +17,8 @@
                         </div>
                     </div>
                 </form>
-            </div>
-        </div>
+            {{-- </div> --}}
+        {{-- </div> --}}
     </div>
 @endsection
 
@@ -236,7 +236,6 @@
             })
             $(document).on('click', '#add_more_owners', function(e) {
                 e.preventDefault();
-                count += 1;
                 $('#add_more_owners_box').append(
                     `
                 <div class="col-md-6">
@@ -289,25 +288,25 @@
                 `)
             })
 
-            function getResults() {
-                let adjustmentPrice = parseFloat($('#adjustmentPrice').val()) || 0;
-                let advancePayment = parseFloat($('#advancePayment').val()) || 0;
-                let plotSalePrice = parseFloat($('#plotSalePrice').val()) || 0;
-                let totalPrice = (plotSalePrice) - (adjustmentPrice + advancePayment);
-                $('#totalCountAlertText').text('Remaining Amount For Installments ' + totalPrice);
-            }
-            $(document).on('input', '#advancePayment', function() {
-                $('#priceNoteShow').show()
-                getResults()
-            })
-            $(document).on('input', '#adjustmentPrice', function() {
-                $('#priceNoteShow').show()
-                getResults()
-            })
-            $(document).on('input', '#plotSalePrice', function() {
-                $('#priceNoteShow').show()
-                getResults()
-            })
+            // function getResults() {
+            //     let adjustmentPrice = parseFloat($('#adjustmentPrice').val()) || 0;
+            //     let advancePayment = parseFloat($('#advancePayment').val()) || 0;
+            //     let plotSalePrice = parseFloat($('#plotSalePrice').val()) || 0;
+            //     let totalPrice = (plotSalePrice) - (adjustmentPrice + advancePayment);
+            //     $('#totalCountAlertText').text('Remaining Amount For Installments ' + totalPrice);
+            // }
+            // $(document).on('input', '#advancePayment', function() {
+            //     $('#priceNoteShow').show()
+            //     getResults()
+            // })
+            // $(document).on('input', '#adjustmentPrice', function() {
+            //     $('#priceNoteShow').show()
+            //     getResults()
+            // })
+            // $(document).on('input', '#plotSalePrice', function() {
+            //     $('#priceNoteShow').show()
+            //     getResults()
+            // })
 
         })
     </script>
