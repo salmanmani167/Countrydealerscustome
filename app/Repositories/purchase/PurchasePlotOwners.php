@@ -15,20 +15,20 @@ class PurchasePlotOwners
     }
     public function store($data , $clientId)
     {
-        $rules = [
-            'other_owner_name' => 'required|string|max:255',
-            'other_owner_email' => 'required|email',
-            'other_owner_number' => 'required',
-            'other_owner_father_or_husband_name' => 'required',
-        ];
-        $validator = Validator::make($data, $rules);
-        if ($validator->fails()) {
-            return redirect()
-                ->route("client.create")
-                ->withErrors($validator)
-                ->withInput();
-        }
-        for ($i = 0; $i < count($data['sales_officer_id']); $i++) {
+        // $rules = [
+        //     'other_owner_name' => 'required',
+        //     'other_owner_email' => 'required|email',
+        //     'other_owner_number' => 'required',
+        //     'other_owner_father_or_husband_name' => 'required',
+        // ];
+        // $validator = Validator::make($data, $rules);
+        // if ($validator->fails()) {
+        //     return redirect()
+        //         ->back()
+        //         ->withErrors($validator)
+        //         ->withInput();
+        // }
+        for ($i = 0; $i < count($data['other_owner_name']); $i++) {
             $otherOwners = [
                 "client_id" => $clientId,
                 "other_owner_name" => $data['other_owner_name'][$i],

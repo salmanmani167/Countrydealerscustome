@@ -6,28 +6,38 @@ use App\Models\Purchase;
 use App\Repositories\purchase\FullPurchaseRepository;
 use App\Repositories\purchase\PurchasePlotInstallmentRepo;
 use App\Repositories\purchase\PurchasePlotOwners;
+use App\Repositories\purchase\PurchasePlotSalesOfficerRepo;
 class PurchaseRepository
 {
     protected $model;
     protected $fullPurchaseRepository;
     protected $PurchasePlotInstallmentRepo;
     protected $PurchasePlotOwners;
+    protected $PurchasePlotSalesOfficerRepo;
     public function __construct(
         Purchase $model,
         FullPurchaseRepository $fullPurchaseRepository,
         PurchasePlotInstallmentRepo $PurchasePlotInstallmentRepo,
-        // PlotSalesOfficersCommissionRepo $PlotSalesOfficersCommissionRepo,
+        PurchasePlotSalesOfficerRepo $PurchasePlotSalesOfficerRepo,
         PurchasePlotOwners $PurchasePlotOwners,
     ) {
         $this->model = $model;
         $this->fullPurchaseRepository = $fullPurchaseRepository;
         $this->PurchasePlotInstallmentRepo = $PurchasePlotInstallmentRepo;
-        // $this->PlotSalesOfficersCommissionRepo = $PlotSalesOfficersCommissionRepo;
+        $this->PurchasePlotSalesOfficerRepo = $PurchasePlotSalesOfficerRepo;
         $this->PurchasePlotOwners = $PurchasePlotOwners;
     }
-
+    public function find($id)
+    {
+        return $this->model->find($id);
+    }
+    public function all()
+    {
+        return $this->model->all();
+    }
     public function store($data)
     {
+        // dd($data);
         $client = [
             "email" => $data["email"],
             "name" => $data["name"],
@@ -54,17 +64,37 @@ class PurchaseRepository
         $client = $this->model->create($client);
         $clientId = $client->id;
         // if payment is full
-        if ($data['payment_type'] == 'yes') {
-            $this->fullPurchaseRepository->store($data, $clientId);
-            // if payment is in installments
-        } else {
-            $this->PurchasePlotInstallmentRepo->store($data, $clientId);
-        }
-        // if (!empty($data['sales_officer_id'])) {
-        //     $this->PlotSalesOfficersCommissionRepo->store($data, $clientId);
+        // if ($data['payment_type'] == 'yes') {
+        //     $this->fullPurchaseRepository->store($data, $clientId);
+        //     // if payment is in installments
+        // } else {
+        //     $this->PurchasePlotInstallmentRepo->store($data, $clientId);
         // }
+        if (!empty($data['sales_officer_id'])) {
+            $this->PurchasePlotSalesOfficerRepo->store($data, $clientId);
+        }
         if (!empty($data['other_owner_name'])) {
             $this->PurchasePlotOwners->store($data, $clientId);
         }
+    }
+    public function show($Id)
+    {
+        return $this->model->with(['installments', 'owners', 'payments', 'saleOfficers.officer'])->where('id', $Id)->first();
+    }
+    public function update($data , $Id)
+    {
+        $record = $this->model->find( $Id);
+        if (isset($data['adjustment_product']) && $data['adjustment_product']->isValid()) {
+            $data['adjustment_product'] = $data['adjustment_product']->store('adjustmentproducts', 'public');
+        }
+        $record->update($data);
+    }
+    public function delete($Id)
+    {
+        $this->model->find( $Id)->delete();
+    }
+    public function getCashInstallments($id)
+    {
+        return $this->PurchasePlotInstallmentRepo->getCashInstallments($id);
     }
 }

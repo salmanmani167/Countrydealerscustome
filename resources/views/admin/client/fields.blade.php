@@ -269,31 +269,6 @@
             <strong>Note : </strong> <span id="totalCountAlertText"></span>
         </div>
     </div>
-
-    {{-- <div class="col-md-12 my-2">
-        <h5 class="">Payment Info</h5>
-    </div>
-    <div class="col-md-6">
-        <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Select Payment Type <sup class="text-danger">*</sup></label>
-            <div class="col-sm-9">
-                <select name="payment_type" id="payment_type" class="form-control">
-                    <option disabled selected>-- selelc if payment is full or not --</option>
-                    <option value="yes">Yes</option>
-                    <option value="no">No</option>
-                </select>
-                @error('payment_type')
-                    <small class="text-danger">{{ $message }}</small>
-                @enderror
-            </div>
-        </div>
-    </div>
-    <div class="col-md-6" id="full_payment_box">
-    </div>
-    <div class="col-md-6 full_payment_box">
-    </div>
-    <div class="col-md-6 cash_field_count_box">
-    </div> --}}
     <div class="cheque_boxes row">
     </div>
     <div class="row" id="cheque_fields_container">

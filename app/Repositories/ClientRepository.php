@@ -70,12 +70,12 @@ class ClientRepository
         $client = $this->model->create($client);
         $clientId = $client->id;
         // if payment is full
-        if ($data['payment_type'] == 'yes') {
-            $this->plotRepository->store($data, $clientId);
-            // if payment is in installments
-        } else {
-            $this->plotInstallmentRepository->store($data, $clientId);
-        }
+        // if ($data['payment_type'] == 'yes') {
+        //     $this->plotRepository->store($data, $clientId);
+        //     // if payment is in installments
+        // } else {
+        //     $this->plotInstallmentRepository->store($data, $clientId);
+        // }
         if (!empty($data['sales_officer_id'])) {
             $this->PlotSalesOfficersCommissionRepo->store($data, $clientId);
         }

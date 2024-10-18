@@ -6,19 +6,15 @@
                 Purchase
             </h3>
         </div>
-        <div class="card">
-            <div class="card-body">
-                <form action="{{route('purchase.store')}}" method="post" enctype="multipart/form-data">
-                    @csrf
-                    @include('admin.client.fields')
-                    <div class="col-md-12">
-                        <div class="form-group row my-2">
-                            <button class="btn btn-sm btn-primary">Submit</button>
-                        </div>
-                    </div>
-                </form>
+        <form action="{{ route('purchase.store') }}" method="post" enctype="multipart/form-data">
+            @csrf
+            @include('admin.client.fields')
+            <div class="col-md-12">
+                <div class="form-group row my-2">
+                    <button class="btn btn-sm btn-primary">Submit</button>
+                </div>
             </div>
-        </div>
+        </form>
     </div>
 @endsection
 
@@ -236,7 +232,7 @@
             })
             $(document).on('click', '#add_more_owners', function(e) {
                 e.preventDefault();
-                count += 1;
+                // count += 1;
                 $('#add_more_owners_box').append(
                     `
                 <div class="col-md-6">
@@ -255,7 +251,7 @@
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label">Email</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="other_owner_email[]" value="{{ $data['email'] ?? '' }}" placeholder="Email Here">
+                            <input type="email" class="form-control" name="other_owner_email[]" value="{{ $data['email'] ?? '' }}" placeholder="Email Here">
                             @error('other_owner_email')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
@@ -266,7 +262,7 @@
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label">Number</label>
                         <div class="col-sm-9">
-                            <input type="number" class="form-control" name="other_owner_number[]" value="{{ $data['number'] ?? '' }}"
+                            <input type="text" class="form-control" name="other_owner_number[]" value="{{ $data['number'] ?? '' }}"
                                 placeholder="Number Here">
                             @error('other_owner_number')
                                 <small class="text-danger">{{ $message }}</small>
@@ -279,7 +275,7 @@
                         <label class="col-sm-3 col-form-label">Fatehr/Husband Name</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" name="other_owner_father_or_husband_name[]" value="{{ $data['father_or_husband_name'] ?? '' }}"
-                                placeholder="Email Here">
+                                placeholder="Father Or Husband Name">
                             @error('other_owner_father_or_husband_name')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
@@ -289,25 +285,25 @@
                 `)
             })
 
-            function getResults() {
-                let adjustmentPrice = parseFloat($('#adjustmentPrice').val()) || 0;
-                let advancePayment = parseFloat($('#advancePayment').val()) || 0;
-                let plotSalePrice = parseFloat($('#plotSalePrice').val()) || 0;
-                let totalPrice = (plotSalePrice) - (adjustmentPrice + advancePayment);
-                $('#totalCountAlertText').text('Remaining Amount For Installments ' + totalPrice);
-            }
-            $(document).on('input', '#advancePayment', function() {
-                $('#priceNoteShow').show()
-                getResults()
-            })
-            $(document).on('input', '#adjustmentPrice', function() {
-                $('#priceNoteShow').show()
-                getResults()
-            })
-            $(document).on('input', '#plotSalePrice', function() {
-                $('#priceNoteShow').show()
-                getResults()
-            })
+            // function getResults() {
+            //     let adjustmentPrice = parseFloat($('#adjustmentPrice').val()) || 0;
+            //     let advancePayment = parseFloat($('#advancePayment').val()) || 0;
+            //     let plotSalePrice = parseFloat($('#plotSalePrice').val()) || 0;
+            //     let totalPrice = (plotSalePrice) - (adjustmentPrice + advancePayment);
+            //     $('#totalCountAlertText').text('Remaining Amount For Installments ' + totalPrice);
+            // }
+            // $(document).on('input', '#advancePayment', function() {
+            //     $('#priceNoteShow').show()
+            //     getResults()
+            // })
+            // $(document).on('input', '#adjustmentPrice', function() {
+            //     $('#priceNoteShow').show()
+            //     getResults()
+            // })
+            // $(document).on('input', '#plotSalePrice', function() {
+            //     $('#priceNoteShow').show()
+            //     getResults()
+            // })
 
         })
     </script>
