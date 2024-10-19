@@ -9,17 +9,20 @@ use Illuminate\Http\Request;
 use App\Repositories\SalesOfficerRepo;
 use App\Repositories\purchase\PurchaseRepository;
 use App\Repositories\purchase\PurchasePlotInstallmentRepo;
+use App\Repositories\ClientRepository;
 
 class PurchaseController extends Controller
 {
     protected $SalesOfficerRepo;
+    protected $clientRepository;
     protected $PurchaseRepository;
     protected $PurchasePlotInstallmentRepo;
-    public function __construct(SalesOfficerRepo $SalesOfficerRepo, PurchaseRepository $PurchaseRepository , PurchasePlotInstallmentRepo $PurchasePlotInstallmentRepo)
+    public function __construct(SalesOfficerRepo $SalesOfficerRepo, PurchaseRepository $PurchaseRepository, PurchasePlotInstallmentRepo $PurchasePlotInstallmentRepo, ClientRepository $clientRepository)
     {
         $this->SalesOfficerRepo = $SalesOfficerRepo;
         $this->PurchaseRepository = $PurchaseRepository;
         $this->PurchasePlotInstallmentRepo = $PurchasePlotInstallmentRepo;
+        $this->clientRepository = $clientRepository;
     }
     public function index()
     {
@@ -29,8 +32,10 @@ class PurchaseController extends Controller
 
     public function create()
     {
+        $oldPlots = $this->clientRepository->getOldPlots();
+        // dd($oldPlots);
         $salesOfficers = $this->SalesOfficerRepo->all();
-        return view("admin.purchase.create", compact('salesOfficers'));
+        return view("admin.purchase.create", data: compact('salesOfficers', 'oldPlots'));
     }
     public function show($id)
     {
@@ -60,8 +65,6 @@ class PurchaseController extends Controller
     }
 
     // purchase installments
-
-
     public function getInstallments($id)
     {
         $data = $this->PurchaseRepository->getCashInstallments($id);
@@ -99,5 +102,10 @@ class PurchaseController extends Controller
         $data = $this->PurchaseRepository->show($client_id);
         $newInstallment = $this->PurchasePlotInstallmentRepo->find($installment_id);
         return view('admin.client.print', compact('data', 'newInstallment'));
+    }
+    public function getOldClient($client_id)
+    {
+        $data = $this->clientRepository->find($client_id);
+        return response()->json(['data'=> $data]);
     }
 }

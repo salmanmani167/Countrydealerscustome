@@ -7,6 +7,23 @@
             </h3>
         </div>
         <form action="{{ route('purchase.store') }}" method="post" enctype="multipart/form-data">
+            <div class="row mb-4">
+                <div class="card col-md-12">
+                    <div class="col-md-6 mt-4">
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label">Select Old Plot</label>
+                            <div class="col-md-9">
+                                <select name="" id="get_old_plot_data" class="form-control">
+                                    <option selected disabled>-- select plot number --</option>
+                                    @foreach ($oldPlots as $oldPlot)
+                                        <option value="{{ $oldPlot->id }}">{{ $oldPlot->number }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             @csrf
             @include('admin.client.fields')
             <div class="col-md-12">
@@ -285,26 +302,29 @@
                 `)
             })
 
-            // function getResults() {
-            //     let adjustmentPrice = parseFloat($('#adjustmentPrice').val()) || 0;
-            //     let advancePayment = parseFloat($('#advancePayment').val()) || 0;
-            //     let plotSalePrice = parseFloat($('#plotSalePrice').val()) || 0;
-            //     let totalPrice = (plotSalePrice) - (adjustmentPrice + advancePayment);
-            //     $('#totalCountAlertText').text('Remaining Amount For Installments ' + totalPrice);
-            // }
-            // $(document).on('input', '#advancePayment', function() {
-            //     $('#priceNoteShow').show()
-            //     getResults()
-            // })
-            // $(document).on('input', '#adjustmentPrice', function() {
-            //     $('#priceNoteShow').show()
-            //     getResults()
-            // })
-            // $(document).on('input', '#plotSalePrice', function() {
-            //     $('#priceNoteShow').show()
-            //     getResults()
-            // })
-
+            $(document).on('change', '#get_old_plot_data', function() {
+                let clientId = $(this).val();
+                $.ajax({
+                    type: "get",
+                    url: 'admin/get/old/client/' + clientId,
+                    success: function(response) {
+                        let oldPlot = response.data;
+                        $('#vehicles_adjustment').text(oldPlot.vehicles_adjustment);
+                        $.each(oldPlot, function(key, value) {
+                            // Check if there is an input field with the matching name
+                            let input = $(`input[name="${key}"]`);
+                            if (input.length) {
+                                // Set the input value to the corresponding oldPlot property value
+                                input.val(value);
+                            }
+                        });
+                    },
+                    error: function(xhr, status, error) {
+                        // Optional: Handle any errors here
+                        console.error("Error: ", error);
+                    }
+                });
+            })
         })
     </script>
 @endsection

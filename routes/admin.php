@@ -65,6 +65,7 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
         Route::post('add/plot/cheque/installment/{id}', 'addNewChequeInstallment')->name('add.plot.cheque.installment');
         Route::get('purchase/installment/status/update/{id}', 'installmentUpdate')->name('purchase.installment.status.update');
         Route::get('purchase/print/{client_id}/{installment_id}', 'print')->name('purchase.print');
+        Route::get('get/old/client/{id}', 'getOldClient')->name('get.old.client');
     });
     Route::controller(SalesOfficerController::class)->group(function () {
         Route::get('sales/officer', 'index')->name('sales.officer.index');

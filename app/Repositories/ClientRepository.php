@@ -41,6 +41,10 @@ class ClientRepository
     {
         return $this->model->all();
     }
+    public function getOldPlots()
+    {
+        return $this->model->select('id' , 'number')->get();
+    }
     public function store($data)
     {
 

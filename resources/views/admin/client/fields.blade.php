@@ -220,7 +220,6 @@
             </div>
         </div>
     </div>
-
     <div class="card col-md-12 mt-3">
         <div class="card-body row">
             <div class="col-md-12 my-2">
@@ -230,7 +229,7 @@
                 <div class="form-group row">
                     <label class="col-sm-3 col-form-label">Properties/Vehicles Adjusted</label>
                     <div class="col-md-12">
-                        <textarea name="vehicles_adjustment" rows="10" id="" class="form-control"
+                        <textarea name="vehicles_adjustment" rows="10" id="vehicles_adjustment" class="form-control"
                             placeholder="Details of any properties or vehicles adjusted">{{ $data['vehicles_adjustment'] ?? old('vehicles_adjustment') }}</textarea>
                         @error('vehicles_adjustment')
                             <small class="text-danger">{{ $message }}</small>
