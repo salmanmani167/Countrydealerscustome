@@ -12,7 +12,7 @@
             <span class="fas fa-bars"></span>
         </button>
         <ul class="navbar-nav navbar-nav-right">
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown" id="dropdpwn">
                 <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#"
                     data-toggle="dropdown">
                     <i class="fas fa-bell mx-0"></i>
@@ -45,7 +45,7 @@
                                 <span
                                     class="ml-5 d-flex justify-content-center align-items-center p-0 me-auto markAsReadNotification"
                                     style="width:30px;height:30px;border-radius: 50%;border:1px solid rgba(0 ,0,0,.2);cursor: pointer;"
-                                    data-paymentNotificationid="{{ $clientNotification->id }}">
+                                    data-paymentNotificationid="{{ $clientNotification->id }}" data-model="client">
                                     <I class="fas fa-check text-primary m-0"></I>
                                 </span>
                             </div>
@@ -69,7 +69,7 @@
                                 <span
                                     class="ml-5 d-flex justify-content-center align-items-center p-0 markAsReadNotification"
                                     style="width:30px;height:30px;border-radius: 50%;border:1px solid rgba(0 ,0,0,.2);cursor: pointer;"
-                                    data-paymentNotificationid="{{ $purchaseNotification->id }}">
+                                    data-paymentNotificationid="{{ $purchaseNotification->id }}" data-model="purchase">
                                     <I class="fas fa-check text-primary m-0"></I>
                                 </span>
                             </div>
@@ -106,14 +106,21 @@
         $('#logoutBtn').on('click', function() {
             $('#logout-form').submit();
         })
-        $('.navbar-menu-wrapper').on('click', function(event) {
-            event.preventDefault(); // Prevent default behavior if needed
-            event.stopPropagation();
+
+        $(document).on('click', '.markAsReadNotification', function() {
+            $('#dropdpwn').removeClass('dropdwon');
+            var paymentNotificationId = $(this).data('paymentnotificationid');
+            var model = $(this).data('model');
+            $.ajax({
+                type: "get",
+                url: "admin/mark/as/read/notification/" + paymentNotificationId + '/' + model,
+                success: function(response) {
+                    window.location.reload();
+                },
+                error: function(error) { // Correct syntax for error function
+                    console.log(error); // Log the error in case something goes wrong
+                }
+            });
         });
-        $('.markAsReadNotification').on('click', function() {
-            let paymentNotificationid = $(this).data('paymentNotificationid')
-            console.log(paymentNotificationid);
-            console.log('yes');
-        })
     </script>
 @endsection

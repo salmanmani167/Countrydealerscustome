@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ClientController;
 use App\Http\Controllers\Admin\EmployeePayrollController;
 use App\Http\Controllers\Admin\ExpenseController;
+use App\Http\Controllers\Admin\NotificationController;
 use App\Http\Controllers\Admin\OfficeEmployeeController;
 use App\Http\Controllers\Admin\PayrollHistoryControlelr;
 use App\Http\Controllers\Admin\PurchaseController;
@@ -72,5 +73,8 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
         Route::get('sales/officer/create', 'create')->name('sales.officer.create');
         Route::post('sales/officer/store', 'store')->name('sales.officer.store');
         Route::delete('sales/officer/delete/{id}', 'delete')->name('sales.officer.delete');
+    });
+    Route::controller(NotificationController::class)->group(function () {
+        Route::get('mark/as/read/notification/{id}/{model}', 'markAsRead')->name('mark.read.notification');
     });
 });
