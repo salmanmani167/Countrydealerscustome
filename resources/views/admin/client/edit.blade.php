@@ -254,13 +254,15 @@
                                     @enderror
                                 </div>
                             </div>
+                            @if (!empty($data['adjustment_product']))
                             <img src="{{Storage::url($data->adjustment_product)}}" alt="" width="200px">
+                            @endif
                         </div>
-                        <div class="col-md-12" style="display: none" id="priceNoteShow">
+                        {{-- <div class="col-md-12" style="display: none" id="priceNoteShow">
                             <div class="alert alert-danger" role="alert">
                                 <strong>Note : </strong> <span id="totalCountAlertText"></span>
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="col-md-12">
                             <div class="form-group row my-2">
                                 <button class="btn btn-sm btn-primary">Submit</button>
@@ -295,4 +297,3 @@
             })
 </script>
 @endsection
-detet

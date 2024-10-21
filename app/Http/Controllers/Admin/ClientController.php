@@ -44,7 +44,7 @@ class ClientController extends Controller
     public function edit($id)
     {
         $data = $this->clientRepository->show($id);
-        return view('admin.purchase.edit', compact('data'));
+        return view('admin.client.edit', compact('data'));
     }
     public function update(UpdateClientRequest $request, $id)
     {

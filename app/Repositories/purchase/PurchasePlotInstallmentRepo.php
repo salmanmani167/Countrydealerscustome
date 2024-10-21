@@ -3,7 +3,9 @@
 namespace App\Repositories\purchase;
 
 
+use App\Models\ClientNotification;
 use App\Models\Purchase;
+use App\Models\PurchaseNotification;
 use App\Models\PurchasePlotInstallments;
 
 class PurchasePlotInstallmentRepo
@@ -75,6 +77,9 @@ class PurchasePlotInstallmentRepo
         $payment = $this->find($paymentId);
         $payment->status = 'PAID';
         $payment->save();
+        // to delete the notification from the `purchase_notifications` table
+
+        PurchaseNotification::where('purchase_notification_id' , $paymentId)->delete();
     }
 
     public function checkBalanceForInstallments($data, $id, $paymentField)

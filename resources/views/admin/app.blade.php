@@ -31,6 +31,7 @@
         <!-- partial -->
         <div class="container-fluid page-body-wrapper">
             <!-- partial -->
+            @include('admin.partials.themeSettings')
             @include('admin.partials.sidebar')
             {{-- main panel starts --}}
             <div class="main-panel">

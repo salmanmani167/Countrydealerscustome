@@ -5,15 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PlotInstallment extends Model
+class ClientNotification extends Model
 {
     protected $guarded = [];
+    public $timestamps = false;
     use HasFactory;
 
-    protected $casts = [     // Cast price to float
-        'cheque_installment_amount' => 'integer', // Cast quantity to integer
-        'installment_payment' => 'integer',
-    ];
     public function client()
     {
         return $this->belongsTo(Client::class , 'client_id');

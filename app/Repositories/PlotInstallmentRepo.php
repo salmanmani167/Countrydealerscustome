@@ -4,7 +4,9 @@ namespace App\Repositories;
 
 
 use App\Models\Client;
+use App\Models\ClientNotification;
 use App\Models\PlotInstallment;
+use App\Models\PurchaseNotification;
 use Illuminate\Support\Facades\Validator;
 
 class PlotInstallmentRepo
@@ -77,6 +79,9 @@ class PlotInstallmentRepo
         $payment = $this->find($paymentId);
         $payment->status = 'PAID';
         $payment->save();
+        // to delete the notification from the `client_notifications` table
+
+        ClientNotification::where('client_notification_id' , $paymentId)->delete();
     }
 
     public function checkBalanceForInstallments($data, $id, $paymentField)

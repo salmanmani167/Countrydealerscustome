@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('status')->nullable();
             $table->string('cheque_image')->nullable();
             $table->string('cheque_installment_amount')->nullable();
-            $table->string('cheque_installment_due_date')->nullable();
+            $table->dateTime('cheque_installment_due_date')->nullable();
             $table->string('installment_payment')->nullable();
             $table->dateTime('payment_installment_due_date')->nullable();
             $table->timestamps();
