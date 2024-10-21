@@ -42,9 +42,11 @@
                                     </p>
                                     <span class="badge bg-success text-white m-0">Client</span>
                                 </div>
-                                <span class="ml-5 d-flex justify-content-center align-items-center p-0 me-auto markAsReadNotification"
-                                    style="width:30px;height:30px;border-radius: 50%;border:1px solid rgba(0 ,0,0,.2);cursor: pointer;" data-paymentNotificationid="{{$clientNotification->id}}">
-                                        <I class="fas fa-check text-primary m-0"></I>
+                                <span
+                                    class="ml-5 d-flex justify-content-center align-items-center p-0 me-auto markAsReadNotification"
+                                    style="width:30px;height:30px;border-radius: 50%;border:1px solid rgba(0 ,0,0,.2);cursor: pointer;"
+                                    data-paymentNotificationid="{{ $clientNotification->id }}">
+                                    <I class="fas fa-check text-primary m-0"></I>
                                 </span>
                             </div>
                         </a>
@@ -64,9 +66,11 @@
                                     </p>
                                     <span class="badge bg-success text-white m-0">Purchase</span>
                                 </div>
-                                <span class="ml-5 d-flex justify-content-center align-items-center p-0 markAsReadNotification"
-                                    style="width:30px;height:30px;border-radius: 50%;border:1px solid rgba(0 ,0,0,.2);cursor: pointer;" data-paymentNotificationid="{{$purchaseNotification->id}}">
-                                        <I class="fas fa-check text-primary m-0"></I>
+                                <span
+                                    class="ml-5 d-flex justify-content-center align-items-center p-0 markAsReadNotification"
+                                    style="width:30px;height:30px;border-radius: 50%;border:1px solid rgba(0 ,0,0,.2);cursor: pointer;"
+                                    data-paymentNotificationid="{{ $purchaseNotification->id }}">
+                                    <I class="fas fa-check text-primary m-0"></I>
                                 </span>
                             </div>
                         </a>
@@ -102,7 +106,11 @@
         $('#logoutBtn').on('click', function() {
             $('#logout-form').submit();
         })
-        $('.markAsReadNotification').on('click' , function(){
+        $('.navbar-menu-wrapper').on('click', function(event) {
+            event.preventDefault(); // Prevent default behavior if needed
+            event.stopPropagation();
+        });
+        $('.markAsReadNotification').on('click', function() {
             let paymentNotificationid = $(this).data('paymentNotificationid')
             console.log(paymentNotificationid);
             console.log('yes');
