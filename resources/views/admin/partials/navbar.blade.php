@@ -117,8 +117,8 @@
                 success: function(response) {
                     window.location.reload();
                 },
-                error: function(error) { // Correct syntax for error function
-                    console.log(error); // Log the error in case something goes wrong
+                error: function(error) {
+                    console.log(error);
                 }
             });
         });
