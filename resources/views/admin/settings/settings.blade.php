@@ -1,12 +1,14 @@
 @extends('admin.app')
 @section('content')
-    @include('admin.expense.modals.expense')
+    @include('admin.settings.modals.type')
     <div class="content-wrapper">
         <div class="page-header">
             <h3 class="page-title">
-                Expenses
+                Settings
             </h3>
-            <a href="javascript:;" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#expenseModal">+ New</a>
+            <div class="d-flex">
+                <a href="javascript:;" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#typeModal">+ New</a>
+            </div>
         </div>
         <div class="card">
             <div class="card-body">
@@ -17,30 +19,21 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Image</th>
-                                        <th>Amount</th>
                                         <th>Type</th>
-                                        <th>Description</th>
+                                        <th>Category Type</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($data as $key => $expense)
+                                    @foreach ($data as $key => $record)
                                         <tr>
                                             <td>{{ $key += 1 }}</td>
+                                            <td>{{ $record->name }}</td>
+                                            <td>{{ $record->type_category }}</td>
                                             <td>
-                                                <a href="{{ Storage::url($expense->picture) }}" target="_blank">
-                                                    <img src="{{ Storage::url($expense->picture) }}" alt=""
-                                                        width="20px">
-                                                </a>
-                                            </td>
-                                            <td>{{ $expense->amount }}</td>
-                                            <td>{{ $expense->expense_type }}</td>
-                                            <td>{{ $expense->description }}</td>
-                                            <td>
-                                                <a href="javascript:;" class="btn btn-danger"
-                                                    onclick="confirmAction('{{ route('expense.delete', $expense->id) }}')">
-                                                    <i class="fas fa-trash"></i>
+                                                <a href="javascript:;" class="btn btn-danger btn-sm"
+                                                    onclick="confirmAction('{{ route('type.delete', $record->id) }}')">
+                                                    <i class="fas fa-regular fa-trash"></i>
                                                 </a>
                                             </td>
                                         </tr>

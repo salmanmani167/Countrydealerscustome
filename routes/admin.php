@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\OfficeEmployeeController;
 use App\Http\Controllers\Admin\PayrollHistoryControlelr;
 use App\Http\Controllers\Admin\PurchaseController;
 use App\Http\Controllers\Admin\SalesOfficerController;
+use App\Http\Controllers\Admin\SettingsController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -78,5 +79,10 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     });
     Route::controller(NotificationController::class)->group(function () {
         Route::get('mark/as/read/notification/{id}/{model}', 'markAsRead')->name('mark.read.notification');
+    });
+    Route::controller(SettingsController::class)->group(function () {
+        Route::get('settings', 'index')->name('settings');
+        Route::post('type/store', 'store')->name('type.store');
+        Route::get('type/delete/{id}', 'delete')->name('type.delete');
     });
 });

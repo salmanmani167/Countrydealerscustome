@@ -10,7 +10,7 @@
             {{-- <div class="card-body"> --}}
                 <form action="{{ route('client.store') }}" method="post" enctype="multipart/form-data">
                     @csrf
-                    @include('admin.client.fields')
+                    @include('admin.client.fields' , ['type'=> 'client'])
                     <div class="col-md-12">
                         <div class="form-group row my-2">
                             <button class="btn btn-sm btn-primary">Submit</button>

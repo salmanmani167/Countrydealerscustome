@@ -22,7 +22,6 @@ class StoreExpenseRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'picture' => 'required | image',
             'amount' => 'required',
             'description' => 'required',
         ];

@@ -83,7 +83,7 @@
                         style="width: 20px;border-radius: 50%;" />
                 </a>
                 <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-                    <a class="dropdown-item">
+                    <a class="dropdown-item" href="{{ route('settings') }}">
                         <i class="fas fa-cog text-primary"></i>
                         Settings
                     </a>

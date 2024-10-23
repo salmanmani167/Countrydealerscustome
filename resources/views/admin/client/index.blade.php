@@ -22,7 +22,8 @@
                                         <th>Father/Husband Name</th>
                                         <th>Client Type</th>
                                         <th>Sale Type</th>
-                                        <th>Actions</th>
+                                        <th>Plot Price</th>
+                                        <th style="width: 200px">Actions</th>
                                         <th>Installments</th>
                                     </tr>
                                 </thead>
@@ -34,6 +35,7 @@
                                             <td>{{ $data->father_or_husband_name }}</td>
                                             <td>{{ $data->client_type }}</td>
                                             <td>{{ $data->sale_type }}</td>
+                                            <td>{{ $data->plot_sale_price }}</td>
                                             <td>
                                                 <a href="javascript:;" class="btn btn-danger btn-sm" onclick="confirmAction('{{ route('client.delete', $data->id) }}')">
                                                     <i class="fas fa-regular fa-trash"></i>

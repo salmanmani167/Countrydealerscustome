@@ -14,7 +14,7 @@
                 <div class="modal-body">
                     <div class="row">
                         @csrf
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Picture</label>
                                 <div class="col-sm-9">
@@ -25,7 +25,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Amount</label>
                                 <div class="col-sm-9">
@@ -34,6 +34,21 @@
                                         @error('amount')
                                             <small class="text-danger">{{ $message }}</small>
                                         @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Expense Type</label>
+                                <div class="col-sm-9">
+                                    <select class="form-control" name="expense_type">
+                                        <option disabled selected>-- select an option --</option>
+                                        @foreach (App\Services\TypeService::getExpenseTypes() as $clientType)
+                                            <option value="{{ $clientType->name }}" @if (!empty($data->clientType) && $data->clientType == $clientType) selected @endif>
+                                                {{ $clientType->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                         </div>

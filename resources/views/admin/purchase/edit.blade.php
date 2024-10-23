@@ -84,10 +84,9 @@
                                 <div class="col-sm-9">
                                     <select class="form-control" name="client_type">
                                         <option disabled selected>-- select an option --</option>
-                                        @foreach (config('vars.client_type') as $clientType)
-                                            <option value="{{ $clientType }}"
-                                                @if (!empty($data->client_type) && $data->client_type == $clientType) selected @endif>
-                                                {{ $clientType }}
+                                        @foreach (App\Services\TypeService::getPurchaseTypes() as $clientType)
+                                            <option value="{{ $clientType->name }}" @if (!empty($data->clientType) && $data->clientType == $clientType) selected @endif>
+                                                {{ $clientType->name }}
                                             </option>
                                         @endforeach
                                     </select>

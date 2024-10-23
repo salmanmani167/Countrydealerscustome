@@ -3,11 +3,13 @@
     @include('admin.purchase.modals.installment')
     @include('admin.purchase.modals.chequeInstallment')
     <div class="content-wrapper">
+
         <div class="page-header">
             <h3 class="page-title">
                 Cash Installment Details
             </h3>
-            <a href="javascript:;" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#installmentModal">+ New</a>
+            <a href="javascript:;" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#installmentModal">+
+                New</a>
         </div>
         <div class="row">
             <div class="col-lg-12">
@@ -46,9 +48,7 @@
                                             @if ($installment->status == 'PAID')
                                                 <button class="btn btn-sm btn-success" disabled>Paid</button>
                                                 {{-- this id is client id --}}
-                                                <a href="{{ route('purchase.print',
-                                                ['client_id' => $id, 'installment_id' => $installment->id ]
-                                                ) }}"
+                                                <a href="{{ route('purchase.print', ['client_id' => $id, 'installment_id' => $installment->id]) }}"
                                                     class="btn btn-outline-primary btn-sm" target="_blank">
                                                     <i class="fas fa-solid fa-print"></i>
                                                 </a>
@@ -115,14 +115,12 @@
                                         </td>
                                         <td>
                                             @if ($installment->status == 'PAID')
-                                            <button class="btn btn-sm btn-success" disabled>Paid</button>
-                                            {{-- this id is client id --}}
-                                            <a href="{{ route('purchase.print',
-                                            ['client_id' => $id, 'installment_id' => $installment->id ]
-                                            ) }}"
-                                                class="btn btn-outline-primary btn-sm" target="_blank">
-                                                <i class="fas fa-solid fa-print"></i>
-                                            </a>
+                                                <button class="btn btn-sm btn-success" disabled>Paid</button>
+                                                {{-- this id is client id --}}
+                                                <a href="{{ route('purchase.print', ['client_id' => $id, 'installment_id' => $installment->id]) }}"
+                                                    class="btn btn-outline-primary btn-sm" target="_blank">
+                                                    <i class="fas fa-solid fa-print"></i>
+                                                </a>
                                             @else
                                                 <a href="javascript:;" class="btn btn-outline-success btn-sm"
                                                     onclick="confirmAction('{{ route('purchase.installment.status.update', $installment->id) }}')">

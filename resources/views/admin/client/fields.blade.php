@@ -76,14 +76,25 @@
                 <div class="form-group row">
                     <label class="col-sm-3 col-form-label">Client Type <sup class="text-danger">*</sup></label>
                     <div class="col-sm-9">
+                        @if($type == 'client')
                         <select class="form-control" name="client_type">
                             <option disabled selected>-- select an option --</option>
-                            @foreach (config('vars.client_type') as $clientType)
-                                <option value="{{ $clientType }}" @if (!empty($data->clientType) && $data->clientType == $clientType) selected @endif>
-                                    {{ $clientType }}
+                            @foreach (App\Services\TypeService::getClientTypes() as $clientType)
+                                <option value="{{ $clientType->name }}" @if (!empty($data->clientType) && $data->clientType == $clientType) selected @endif>
+                                    {{ $clientType->name }}
                                 </option>
                             @endforeach
                         </select>
+                        @else
+                        <select class="form-control" name="client_type">
+                            <option disabled selected>-- select an option --</option>
+                            @foreach (App\Services\TypeService::getPurchaseTypes() as $clientType)
+                                <option value="{{ $clientType->name }}" @if (!empty($data->clientType) && $data->clientType == $clientType) selected @endif>
+                                    {{ $clientType->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                        @endif
                         @error('client_type')
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
